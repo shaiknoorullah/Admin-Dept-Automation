@@ -18,7 +18,20 @@
   },
   "homepage": "https://github.com/shaiknoorullah/Admin-Dept-Automation#readme",
   "dependencies": {
+    "firebase": "^9.6.5",
+    "firebase-tools": "^10.1.4",
+    "firebaseui": "^6.0.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
     "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4",
+    "webpack-merge": "^5.8.0"
   }
 }
