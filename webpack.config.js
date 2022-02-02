@@ -17,6 +17,21 @@ module.exports = {
     port: 9000,
   },
 
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react']
+          }
+        }
+      }
+    ]
+  },
+
   plugins: [new HtmlWebpackPlugin()],
 
 };
