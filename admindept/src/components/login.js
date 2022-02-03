@@ -2,6 +2,13 @@ import React from 'react';
 import Top from '../img/top.svg'
 
 export default function login() {
+  //bsdk ye form ka data hai
+    const submit=(e)=>{
+      e.preventDefault()
+      const phone=e.target.phone.value;
+      console.log(phone)
+  
+  }
   return <div>
     {/*Left Column*/}
       <div className='flex flex-row'>
@@ -20,14 +27,16 @@ export default function login() {
               </div>
               {/*form*/}
               <div className='grid content-start row-span-2'>
-                  <form action="" className='max-w-md mr-auto'>
+                  <form action="" className='max-w-md mr-auto' onSubmit={submit}>
                       <label htmlFor="" className='block py-2'>Phone Number:</label>
-                      <input type="tel" placeholder='Enter Your Number' id="phone"className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md'/>
-                      <button className='block mt-8 bg-[#4165BF] max-w-md mx-auto px-40 py-[9px] rounded-md text-white'>Get OTP</button>
+                      <input type="tel" name="phone" placeholder='Enter Your Number' defaultValue={"+"+91} className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md'/>
+                      <button className='block mt-8 bg-[#4165BF] max-w-md mx-auto px-40 py-[9px] rounded-md text-white' >Get OTP</button>
                   </form>
               </div>
           </div>  
       </div>
   </div>;
 }
+
+
 
