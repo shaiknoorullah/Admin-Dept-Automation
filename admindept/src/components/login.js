@@ -14,15 +14,15 @@ export default function login() {
               <div className='grid content-center'>
               <h2 className='font-gilroy font-semibold text-2xl'>Let’s Login, Shall we?
               <span className='font-sofiapro font-light opacity-70 block text-lg'>
-                A roll no here and a mobile number there and login.<br />Easee-peezee
+                A mobile number here and login.<br />Easee-peezee
               </span>
               </h2>
               </div>
               {/*form*/}
               <div className='grid content-start row-span-2'>
                   <form action="" className='max-w-md mr-auto'>
-                      <label htmlFor="" className='block py-2'>Roll No:</label>
-                      <input type="text" placeholder='Enter Your Roll Number' className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md'/>
+                      <label htmlFor="" className='block py-2'>Phone Number:</label>
+                      <input type="tel" placeholder='Enter Your Number' id="phone"className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md'/>
                       <button className='block mt-8 bg-[#4165BF] max-w-md mx-auto px-40 py-[9px] rounded-md text-white'>Get OTP</button>
                   </form>
               </div>
