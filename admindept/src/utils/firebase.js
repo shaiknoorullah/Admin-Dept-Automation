@@ -16,11 +16,12 @@ let app = initializeApp({
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 })
 
-export default ({ children }) => {
-    return (
-      <FirebaseContext.Provider value={ app }>
-        { children }
-      </FirebaseContext.Provider>
-    )
-  }
+// export default ({ children }) => {
+//     return (
+//       <FirebaseContext.Provider value={ app }>
+//         { children }
+//       </FirebaseContext.Provider>
+//     )
+//   }
 
+export default app
