@@ -17,8 +17,6 @@ let app = initializeApp({
 })
 
 export default ({ children }) => {
-    if (!app.apps.length) {
-    }
     return (
       <FirebaseContext.Provider value={ app }>
         { children }
