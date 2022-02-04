@@ -24,7 +24,7 @@ export default function login() {
                   <form action="" className='max-w-md mr-auto' onSubmit={submitUsrPhn}>
                       <label htmlFor="" className='block py-2'>Phone Number:</label>
                       <input type="tel" name="phone" id='phoneno' placeholder='Enter Your Number' defaultValue={"+"+91} onChange={validation} className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md'/>
-                      <button className='block mt-8 bg-[#4165BF] max-w-md mx-auto px-40 py-[9px] rounded-md text-white' >Get OTP</button>
+                      <button className='block mt-8 bg-[#4165BF] max-w-md mx-auto px-40 py-[9px] rounded-md text-white' id="phnsubmitbtn">Get OTP</button>
                   </form>
               </div>
           </div>  

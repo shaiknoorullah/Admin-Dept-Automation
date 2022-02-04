@@ -1,3 +1,13 @@
+
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+
+
+
+
+// const auth = getAuth();
+
+
+
 // User Phone Number Stored
 
 export const submitUsrPhn = (e)=> {
@@ -5,6 +15,31 @@ export const submitUsrPhn = (e)=> {
     const phone=e.target.phone.value;
     // console.log(phone)
     let usrPhone = Number(phone)
+
+    const auth = getAuth();
+
+    window.recaptchaVerifier = new RecaptchaVerifier('phnsubmitbtn', {
+      'size': 'invisible',
+      'callback': (response) => {
+        // reCAPTCHA solved, allow signInWithPhoneNumber.
+        // onSignInSubmit();
+      }
+    }, auth);
+
+    signInWithPhoneNumber(auth, usrPhone, window.recaptchaVerifier)
+    .then((confirmationResult) => {
+      // SMS sent. Prompt user to type the code from the message, then sign the
+      // user in with confirmationResult.confirm(code).
+      window.confirmationResult = confirmationResult;
+      // ...
+    }).catch((error) => {
+      // Error; SMS not sent
+      // ...
+    });
+
+
+
+
     // console.log(usrPhone)
     return usrPhone
     
@@ -31,6 +66,6 @@ export function validation (val) {
 }
 
 
-
+ 
 
 
