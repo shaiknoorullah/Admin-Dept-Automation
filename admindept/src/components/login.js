@@ -19,7 +19,7 @@ export default function login() {
           <div className='px-14 grid grid-flow-row gap-0 row-span-2'>
               {/*intro Text*/}
               <div className='grid content-center'>
-              <h2 className='font-gilroy font-semibold text-2xl'>Let’s Login, Shall we?
+              <h2 className='font-gilroy font-semibold text-xl'>Let’s Login, Shall we?
               <span className='font-sofiapro font-light opacity-70 block text-lg'>
                 A mobile number here and login.<br />Easee-peezee
               </span>
