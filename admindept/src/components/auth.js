@@ -2,7 +2,20 @@ import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut, confirmatio
 import {app} from '../utils/firebase'
 
 
-
+function loading (){
+    const loading=document.getElementById('loading');
+    const otpText=document.getElementById('otptext')
+    loading.classList.remove('hidden')
+    otpText.textContent="Processing"
+}
+function notLoading (){
+    const loading=document.getElementById('loading');
+    const tick=document.getElementById('tick')
+    const otpText=document.getElementById('otptext')
+    loading.classList.add('hidden')
+    otpText.textContent="OTPSent"
+    tick.classList.remove('hidden')
+}
 
 const auth = getAuth(app);
 
@@ -12,7 +25,7 @@ let confirmationResultForOtp
 
 export const onSignInSubmit = (e) => {
   e.preventDefault();
-
+  loading()
   // store user phone number
   const phoneNumber = e.target.mobile.value;
 
@@ -46,6 +59,7 @@ export const onSignInSubmit = (e) => {
       window.confirmationResult = confirmationResult;
       confirmationResultForOtp = confirmationResult;
       // console.log(confirmationResult);
+      notLoading()
       console.log("OTP is sent");
     })
     .catch(function (error) {
