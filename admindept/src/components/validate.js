@@ -12,6 +12,7 @@ export function validation (val) {
     if(numberPattern.test(phoneCheck))
     {
         val.target.classList.add('border-green-500')
+        val.target.classList.remove('border-red-600')
         button.disabled=false;
     }
     else
