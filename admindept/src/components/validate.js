@@ -11,11 +11,11 @@ export function validation (val) {
 
     if(numberPattern.test(phoneCheck))
     {
-        input.classList.add('border-green-500')
+        val.target.classList.add('border-green-500')
     }
     else
     {
-        input.classList.add('border-red-600')
+        val.target.classList.add('border-red-600')
     }
 
 }
