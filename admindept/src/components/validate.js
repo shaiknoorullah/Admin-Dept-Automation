@@ -6,7 +6,7 @@ export default function validate() {
 export function validation (val) {
     
     let phoneCheck = val.target.value
-    let button=document.getElementById('button')
+    let button=document.getElementById('recaptcha-container')
     let numberPattern = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/
 
     if(numberPattern.test(phoneCheck))
