@@ -19,15 +19,25 @@ function notLoading (){
 
 const auth = getAuth(app);
 
-let confirmationResultForOtp
+var window = {
+  confirmationResult: undefined
+}
+
 
 // Submit Phone Number && verify recaptcha && send otp
 
 export const onSignInSubmit = (e) => {
   e.preventDefault();
-  loading()
   // store user phone number
   const phoneNumber = e.target.mobile.value;
+  submitPhn(phoneNumber)
+
+};
+
+function submitPhn(phoneNumber){
+  
+  loading()
+
 
   // console.log(phoneNumber);
 
@@ -56,8 +66,14 @@ export const onSignInSubmit = (e) => {
     .then(function (confirmationResult) {
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).
-      window.confirmationResult = confirmationResult;
-      confirmationResultForOtp = confirmationResult;
+      
+      const getOtpFromUserInput = (e) =>{
+        e.preventDefault()
+        const otp = e.target.otp.value
+        return otp
+      }
+
+      window.confirmationResult = confirmationResult.confirm(otp);
       // console.log(confirmationResult);
       notLoading()
       console.log("OTP is sent");
@@ -65,15 +81,12 @@ export const onSignInSubmit = (e) => {
     .catch(function (error) {
       console.log(error);
     });
+    
 };
 
 // Get Opt from User
 
-export const getOtpFromUserInput = (e) =>{
-  e.preventDefault()
-  const otp = e.target.otp.value
-  return otp
-}
+
 
 
 
