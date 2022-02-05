@@ -1,12 +1,13 @@
 import React from 'react';
 import Top from '../img/top.svg'
 import {validation} from './validate'
+import mbbg from '../img/mbbg.svg'
 
 export default function login() {
  
   return <div>
-    {/*Left Column*/}
-      <div className='flex flex-row'>
+    {/*Left Column for desktop*/}
+      <div className='md:flex flex-row hidden'>
       <div className='bg-[#2455D6] basis-1/2 h-screen flex justify-center items-center'>
               <img src={Top} alt="" className='w-4/5'/>
           </div>
@@ -30,7 +31,12 @@ export default function login() {
               </div>
           </div>  
       </div>
+      {/*For mobile */}
+      <div className=' block md:hidden h-screen'>
+        <img src={mbbg} alt="" className='' />
+      </div>
   </div>;
+
 }
 
 
