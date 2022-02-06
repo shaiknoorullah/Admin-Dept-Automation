@@ -1,5 +1,6 @@
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut, confirmationResult} from "firebase/auth";
 import {app} from '../utils/firebase'
+import Otpmodal from "./otpmodal.js";
 
 
 const auth = getAuth(app);
@@ -10,8 +11,8 @@ let confirmationResultForOtp
 
 export const onSignInSubmit = (e) => {
   e.preventDefault();
-  // store user phone number
-  const phoneNumber = e.target.mobile.value;
+  // store user phone number //added by default +91
+  const phoneNumber = "+91" + e.target.mobile.value;
 
   // console.log(phoneNumber);
 
@@ -49,7 +50,6 @@ export const onSignInSubmit = (e) => {
       console.log(error);
     });
 };
-
 // Get Opt from User
 
 export const getOtpFromUserInput = (e) =>{
