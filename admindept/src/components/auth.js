@@ -2,13 +2,14 @@ import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut, confirmatio
 import {app} from '../utils/firebase'
 
 
-function loading (){
+export function loading (){
     const loading=document.getElementById('loading');
     const otpText=document.getElementById('otptext')
     loading.classList.remove('hidden')
     otpText.textContent="Processing"
 }
-function notLoading (){
+
+export function notLoading (){
     const loading=document.getElementById('loading');
     const tick=document.getElementById('tick')
     const otpText=document.getElementById('otptext')
@@ -34,7 +35,7 @@ export const onSignInSubmit = (e) => {
 
 };
 
-function submitPhn(phoneNumber){
+export function submitPhn(phoneNumber){
   
   loading()
 
@@ -67,11 +68,12 @@ function submitPhn(phoneNumber){
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).
       
-      const getOtpFromUserInput = (e) =>{
-        e.preventDefault()
-        const otp = e.target.otp.value
-        return otp
-      }
+      // get OTP from user
+      // const getOtpFromUserInput = (e) =>{
+      //   e.preventDefault()
+      //   const otp = e.target.otp.value
+      //   return otp
+      // }
 
       window.confirmationResult = confirmationResult.confirm(otp);
       // console.log(confirmationResult);
