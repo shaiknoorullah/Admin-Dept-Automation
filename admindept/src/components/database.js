@@ -1,6 +1,7 @@
 import {app} from '../utils/firebase'
 import 'firebase/firestore'
 import { Firestore, getFirestore, addDoc, getDoc, collection, query, where } from 'firebase/firestore'
+import  {rollNoEval} from './rollNoEval'
 // import {firebase} from 'firebase'
 import toast from 'react-hot-toast'
 
@@ -22,17 +23,7 @@ export async function CheckUsrPhnInDb(phoneNumber){
 
 export const createUserDocument = async (studentname, mobile, email, roll_no)=>{
 
-    // try {
-    //             const docRef = addDoc(collection(appappdb, "users"), {
-    //               first: "Ada",
-    //               last: "Lovelace",
-    //               born: 1815
-    //             });
-    //             console.log("Document written with ID: ", docRef);
-    //           } catch (e) {
-    //             console.error("Error adding document: ", e);
-    //           }
-    //     }
+    rollNoEval(roll_no)
 
 
     if(!studentname || !mobile || !email || !roll_no){
