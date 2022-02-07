@@ -1,6 +1,6 @@
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut, confirmationResult} from "firebase/auth";
 import {app} from '../utils/firebase'
-import Otpmodal from "./otpmodal.js";
+import Otpmodal from "./otpmodal";
 
 
 const auth = getAuth(app);
@@ -31,7 +31,6 @@ export const onSignInSubmit = (e) => {
     },
     defaultCountry: "IN"
   },auth);
-
 
   // console.log("appVerifier", appVerifier)
   

@@ -41,8 +41,8 @@ export default function login() {
       </Flex>
       {/*End Of Form*/}
     </Box>
-    <Otpmodal></Otpmodal>
   </div>;
+  
 }
 
 

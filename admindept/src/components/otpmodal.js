@@ -15,7 +15,6 @@ import {
     Flex
   } from '@chakra-ui/react'
 function Otpmodal() {
-    console.log('modal')
   return <div>
         <Modal isOpen={true} >
         <ModalOverlay />
@@ -50,5 +49,6 @@ function Otpmodal() {
       </Modal>
   </div>;
 }
+
 
 export default Otpmodal;
