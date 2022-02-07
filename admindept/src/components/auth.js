@@ -67,14 +67,14 @@ export function submitPhn(phoneNumber){
     .then(function (confirmationResult) {
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).
+      confirmationResult.confirm(prompt("please enter your otp", "123456"))
+      .then((result)=>{
+        const user = result.user
+        // Here we check if the user is available in the database
+        console.log(phoneNumber, "is signed in")
+        // Here you will add the route to the student dashboard and log in the user
+      })
       
-      // get OTP from user
-      // const getOtpFromUserInput = (e) =>{
-      //   e.preventDefault()
-      //   const otp = e.target.otp.value
-      //   return otp
-      // }
-
       window.confirmationResult = confirmationResult.confirm(otp);
       // console.log(confirmationResult);
       notLoading()
