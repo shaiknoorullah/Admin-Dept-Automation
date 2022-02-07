@@ -2,7 +2,7 @@ import React from 'react';
 import Top from '../img/top.svg'
 import {validation} from './validate'
 import mbbg from '../img/mbbg.svg'
-import {onSignInSubmit,getOtpFromUserInput} from './auth'
+import {onSignInSubmit,getOtpFromUserInput} from './userAuth'
 export default function login() {
  
   return <div>

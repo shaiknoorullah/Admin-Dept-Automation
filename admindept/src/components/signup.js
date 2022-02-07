@@ -2,7 +2,7 @@ import React from 'react';
 import Top from '../img/top.svg'
 import {validation} from './validate'
 import mbbg from '../img/mbbg.svg'
-import { onInput, onSubmit } from './signupauth';
+import { onSignUpSubmit } from './signupauth';
 
 export default function Signup() {
  
@@ -24,12 +24,12 @@ export default function Signup() {
               </div>
               {/*form*/}
               <div className='grid content-start row-span-2'>
-                  <form action="" className='max-w-md mr-auto' onSubmit={onSubmit}>
+                  <form action="" className='max-w-md mr-auto' onSubmit={onSignUpSubmit}>
                       <label htmlFor="" className='block py-2'>Signup:</label>
-                      <input type="text" name="name" id='input' placeholder='Enter Your Name' className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md focus:outline-none' />
+                      <input type="text" name="studentname" id='input' placeholder='Enter Your Name' className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md focus:outline-none' />
                       <input type="tel" name="mobile" id='input' placeholder='Enter Your Number' defaultValue={"+"+91} className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md focus:outline-none' onChange={validation}/>
                       <input type="string" name="email" id='input' placeholder='Enter Your email'  className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md focus:outline-none' />
-                      <input type="number" name="roll_no" id='input' placeholder='Enter Your Number'  className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md focus:outline-none' />
+                      <input type="string" name="roll_no" id='input' placeholder='Enter Your Roll Number'  className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md focus:outline-none' />
 
                       <button className=' mt-8 bg-[#4165BF] mx-auto py-[9px] rounded-md text-white disabled:bg-slate-400 transition-colors duration-700 ease-in-out flex items-center justify-center px-[37.9%]  max-w-md' id='recaptcha-container'>
                         <span id='loading' className='hidden'>

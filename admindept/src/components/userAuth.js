@@ -1,5 +1,6 @@
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut, confirmationResult} from "firebase/auth";
 import {app} from '../utils/firebase'
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut, confirmationResult} from "firebase/auth";
+import {CheckUsrPhnInDb} from './database'
 
 
 export function loading (){
@@ -31,11 +32,13 @@ export const onSignInSubmit = (e) => {
   e.preventDefault();
   // store user phone number
   const phoneNumber = e.target.mobile.value;
-  submitPhn(phoneNumber)
-
+  CheckUsrPhnInDb(phoneNumber)
+  .then(submitPhn(phoneNumber))
+  .catch("the phone number does not exist")
+  
 };
 
-export function submitPhn(phoneNumber){
+export async function submitPhn(phoneNumber){
   
   loading()
 
@@ -67,15 +70,20 @@ export function submitPhn(phoneNumber){
     .then(function (confirmationResult) {
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).
-      confirmationResult.confirm(prompt("please enter your otp", "123456"))
+      confirmationResult.confirm(
+        // letstrythis()
+        prompt("please enter your otp", "123456")
+        
+        )
       .then((result)=>{
         const user = result.user
+        console.log(user, "is signed in!")
         // Here we check if the user is available in the database
         console.log(phoneNumber, "is signed in")
         // Here you will add the route to the student dashboard and log in the user
       })
       
-      window.confirmationResult = confirmationResult.confirm(otp);
+      // window.confirmationResult = confirmationResult.confirm(otp);
       // console.log(confirmationResult);
       notLoading()
       console.log("OTP is sent");
@@ -83,7 +91,7 @@ export function submitPhn(phoneNumber){
     .catch(function (error) {
       console.log(error);
     });
-    
+    return null
 };
 
 // Get Opt from User
