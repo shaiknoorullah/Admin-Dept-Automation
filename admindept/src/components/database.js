@@ -23,8 +23,12 @@ export async function CheckUsrPhnInDb(phoneNumber){
 
 export const createUserDocument = async (studentname, mobile, email, roll_no)=>{
 
-    rollNoEval(roll_no)
-
+    const EvaluatedRollNo = rollNoEval(roll_no)
+    const CollegeCode = EvaluatedRollNo.CollegeCode
+    const YearOfAdmission = EvaluatedRollNo.YearOfAdmission
+    const Branch = EvaluatedRollNo.Branch
+    const CurrentYear = EvaluatedRollNo.CurrentYear
+    const ClassRollNo = EvaluatedRollNo.ClassRollNo
 
     if(!studentname || !mobile || !email || !roll_no){
         toast.error("please don't leave a blank field")
@@ -35,7 +39,12 @@ export const createUserDocument = async (studentname, mobile, email, roll_no)=>{
         studentname: studentname,
         phone: mobile,
         email: email,
-        roll_no: roll_no
+        roll_no: roll_no,
+        CollegeCode: CollegeCode,
+        YearOfAdmission: YearOfAdmission,
+        Branch: Branch,
+        CurrentYear: CurrentYear,
+        ClassRollNo: ClassRollNo,
     })
     toast.success("Document written with ID: ", userRef);
     }catch (e) {
