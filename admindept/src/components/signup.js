@@ -24,7 +24,7 @@ export default function signup() {
  <Text fontSize='md' pb={'10'}>Create your account here</Text>
 <Box>
 <form onSubmit={onSignInSubmit}>
-<FormControl size={'md'} width={'md'}>
+<FormControl size={'md'} width={'md'} isRequired>
 <FormLabel htmlFor='tel'>Student Name</FormLabel>
 <Input type='text' placeholder='Enter Your Full Name' errorBorderColor='crimson' id='name' mb={'20px'}/>
 <FormLabel htmlFor='tel'>Phone Number</FormLabel>
