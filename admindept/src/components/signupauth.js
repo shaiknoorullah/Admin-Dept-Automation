@@ -46,7 +46,7 @@ export const onSignUpSubmit=(e)=>{
         
     submitPhn(userData.mobile)
         .then(
-            createUserDocument(userData.studentname, userData.mobile, userData.email, userData.roll_no)
+            createUserDocument(userData.studentname, userData.mobile, userData.email, userData.roll_no) 
         )
     }
     

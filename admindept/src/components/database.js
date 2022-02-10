@@ -1,13 +1,13 @@
 import {app} from '../utils/firebase'
 import 'firebase/firestore'
-import { Firestore, getFirestore, addDoc, getDoc, collection, query, where } from 'firebase/firestore'
+import { Firestore, getFirestore, addDoc, getDoc, setDoc, collection, query, where, Timestamp } from 'firebase/firestore'
 import  {rollNoEval} from './rollNoEval'
 // import {firebase} from 'firebase'
 import toast from 'react-hot-toast'
 
 
 
-const appdb = getFirestore()
+export const appdb = getFirestore()
 
 export async function CheckUsrPhnInDb(phoneNumber){
 
@@ -23,31 +23,32 @@ export async function CheckUsrPhnInDb(phoneNumber){
 
 export const createUserDocument = async (studentname, mobile, email, roll_no)=>{
 
-    const EvaluatedRollNo = rollNoEval(roll_no)
-    const CollegeCode = EvaluatedRollNo.CollegeCode
-    const YearOfAdmission = EvaluatedRollNo.YearOfAdmission
-    const Branch = EvaluatedRollNo.Branch
-    const CurrentYear = EvaluatedRollNo.CurrentYear
-    const ClassRollNo = EvaluatedRollNo.ClassRollNo
-
     if(!studentname || !mobile || !email || !roll_no){
-        toast.error("please don't leave a blank field")
+        console.log("please don't leave a blank field")
     }
 
+
+
+    const studentData = rollNoEval(roll_no)
+    // console.log(studentData)
+
     try{
-    const userRef = addDoc(collection(appdb, "users"),{
+
+
+    const userRef = await addDoc(collection(appdb, "users"),{
         studentname: studentname,
         phone: mobile,
         email: email,
         roll_no: roll_no,
-        CollegeCode: CollegeCode,
-        YearOfAdmission: YearOfAdmission,
-        Branch: Branch,
-        CurrentYear: CurrentYear,
-        ClassRollNo: ClassRollNo,
-    })
-    toast.success("Document written with ID: ", userRef);
+        CollegeCode: studentData.CollegeCode,
+        YearOfAdmission: studentData.YearOfAdmission,
+        Branch: studentData.Branch,
+        CurrentYear: studentData.CurrentYear,
+        ClassRollNo: studentData.ClassRollNo,
+    }
+    )
+    console.log("Document written with ID: ", userRef);
     }catch (e) {
-    toast.error("Error adding document: ", e);
+    console.log("Error adding document: ", e);
     }
 }

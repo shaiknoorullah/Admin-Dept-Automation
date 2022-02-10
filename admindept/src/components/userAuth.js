@@ -34,7 +34,9 @@ export const onSignInSubmit = (e) => {
   const phoneNumber = e.target.mobile.value;
   CheckUsrPhnInDb(phoneNumber)
   .then(submitPhn(phoneNumber))
-  .catch("the phone number does not exist")
+  .catch((e)=>{
+    console.log("The Phone Number does not exist in DB")
+  })
   
 };
 
