@@ -1,12 +1,24 @@
-import React from 'react';
-import { Flex, Spacer,Image, Box, Button, Center, Stack ,Text,FormControl,FormLabel,InputGroup, InputLeftAddon,Heading,Input} from '@chakra-ui/react'
+import React,{useState} from 'react';
+import { Flex, Spacer,Image, Stack ,Text,FormControl,FormLabel,InputGroup, InputLeftAddon,Heading,InputModal,Modal,Input,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  HStack,
+  ModalCloseButton,
+  PinInput, PinInputField,
+  Box,
+  Button,
+  Center,
+  } from '@chakra-ui/react'
 import Top from '../img/top.svg'
 import {validation} from './validate'
 import mbbg from '../img/mbbg.svg'
 import {onSignInSubmit,getOtpFromUserInput} from './auth'
 import Otpmodal from './otpmodal.js';
-export default function login() {
- 
+export default function Login() {
+  const [modalState, SetModalState] = useState(false)
   return <div>
     {/*Wrapper Full */}
     <Box >
@@ -25,7 +37,7 @@ export default function login() {
         </Heading>
         <Text fontSize='md' pb={'10'}>A Mobile number here and an OTP there. Eazee-Peezee</Text>
       <Box>
-      <form onSubmit={onSignInSubmit}>
+      <form onSubmit={(e)=>{onSignInSubmit(e,()=>{SetModalState(true)})}}>
       <FormControl>
       <FormLabel htmlFor='tel'>Phone Number</FormLabel>
       <InputGroup size={'md'} width={'md'}>
@@ -41,6 +53,39 @@ export default function login() {
       </Flex>
       {/*End Of Form*/}
     </Box>
+    <Modal isOpen={modalState} >
+        <ModalOverlay />
+        <ModalContent >
+        <ModalHeader py={'6'} >
+            <Flex justifyContent={'center'}>
+            Enter OTP
+            </Flex>
+        </ModalHeader>
+        <Center>
+        <HStack>
+        <PinInput>
+        <PinInputField />
+        <PinInputField />
+        <PinInputField />
+        <PinInputField />
+        <PinInputField />
+        <PinInputField />
+        </PinInput>
+        </HStack>
+        </Center>
+          
+          <ModalBody>
+          
+          </ModalBody>
+          <ModalFooter>
+              <Center width={'md'}>
+              <Button colorScheme='blue' mr={3} >
+              Submit
+            </Button>
+              </Center>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
   </div>;
   
 }

@@ -31,6 +31,8 @@ function Otpmodal() {
         <PinInputField />
         <PinInputField />
         <PinInputField />
+        <PinInputField />
+        <PinInputField />
         </PinInput>
         </HStack>
         </Center>

@@ -4,8 +4,7 @@ import Signup from './components/signup.js';
 function App() {
   return (
    <div>
-     <Signup/>
-  {/* {<Login/>} */}
+   <Login/>
    </div>
   );
 }

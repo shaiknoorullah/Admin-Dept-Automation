@@ -9,7 +9,7 @@ let confirmationResultForOtp
 
 // Submit Phone Number && verify recaptcha && send otp
 
-export const onSignInSubmit = (e) => {
+export const onSignInSubmit = (e,cb) => {
   e.preventDefault();
   // store user phone number //added by default +91
   const phoneNumber = "+91" + e.target.mobile.value;
@@ -36,7 +36,7 @@ export const onSignInSubmit = (e) => {
   
   // Submitting the user phone number && sending the otp
 
-  signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+  signInWithPhoneNumber(auth, phoneNumber, appVerifier,cb)
     .then(function (confirmationResult) {
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).
@@ -44,6 +44,7 @@ export const onSignInSubmit = (e) => {
       confirmationResultForOtp = confirmationResult;
       // console.log(confirmationResult);
       console.log("OTP is sent");
+cb()
     })
     .catch(function (error) {
       console.log(error);
