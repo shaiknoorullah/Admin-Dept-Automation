@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Top from "../img/top.svg";
-import { validation } from "./validate";
 import mbbg from "../img/mbbg.svg";
 import { confirmOTP, sendOTP } from "./userAuth";
 import Otpmodal from "./otpmodal";
+import { validation } from "./validate";
 import {
   Modal,
   ModalOverlay,
@@ -41,6 +41,9 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // check if number exists in DB
+    // authenticate phone number
+    // create user document
     let signInReturn = await sendOTP(number);
     setConfirmResult(signInReturn);
     setIsModalOpen(true);
@@ -99,7 +102,7 @@ export default function Login() {
                 placeholder="Enter Your Number"
                 value={number}
                 className="pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md focus:outline-none"
-                onChange={handleChange}
+                onChange={(validation, handleChange)}
               />
               <button
                 className=" mt-8 bg-[#4165BF] mx-auto py-[9px] rounded-md text-white disabled:bg-slate-400 transition-colors duration-700 ease-in-out flex items-center justify-center px-[37.9%]  max-w-md"

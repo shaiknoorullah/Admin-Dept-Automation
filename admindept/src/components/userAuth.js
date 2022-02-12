@@ -2,9 +2,9 @@ import { app } from "../utils/firebase";
 import {
   getAuth,
   RecaptchaVerifier,
-  signInWithPhoneNumber,
   signOut,
   confirmationResult,
+  signInWithPhoneNumber,
 } from "firebase/auth";
 import { CheckUsrPhnInDb } from "./database";
 import Otpmodal from "./otpmodal";
@@ -29,19 +29,19 @@ const auth = getAuth(app);
 
 // Submit Phone Number && verify recaptcha && send otp
 export const submitPhn = null;
-// export const onSignInSubmit = (phoneNumber) => {
+// export const onSignInSubmit = (mobile) => {
 //   // e.preventDefault();
 //   // store user phone number
-//   // const phoneNumber = e.target.mobile.value;
-//   CheckUsrPhnInDb(phoneNumber)
-//   .then(submitPhn(phoneNumber))
+//   // const mobile = e.target.mobile.value;
+//   CheckUsrPhnInDb(mobile)
+//   .then(submitPhn(mobile))
 //   .catch(error => {
 //     console.log("The Phone Number does not exist in DB")
 //   })
 
 // };
 
-export const sendOTP = (number) => {
+export const sendOTP = (mobile) => {
   let appVerifier = new RecaptchaVerifier(
     "recaptcha-container",
     {
@@ -60,18 +60,17 @@ export const sendOTP = (number) => {
     },
     auth
   );
-  return signInWithPhoneNumber(auth, number, appVerifier);
+  return signInWithPhoneNumber(auth, mobile, appVerifier);
 };
 
-export const confirmOTP = (confirmResult, userOTP) => {
-  const result = confirmResult
+export const confirmOTP = async (confirmResult, userOTP) => {
+  const result = await confirmResult
     .confirm(userOTP)
     .then((result) => {
       // User signed in successfully.
       const user = result.user;
       console.log(user, "is signed in!");
       return true;
-      // Here we check if the user is available in the database
     })
     .catch((error) => {
       // User couldn't sign in (bad verification code?)
