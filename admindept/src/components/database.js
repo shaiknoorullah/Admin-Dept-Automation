@@ -18,41 +18,56 @@ import toast from "react-hot-toast";
 
 export const appdb = getFirestore();
 
-// const q = query(collection(db, "users"), where("mobile", "==", phoneNumber));
+export const CheckUsrPhnInDb = async (mobile, rollNo) => {
+  const studentRef = collection(appdb, "users");
 
-// const querySnapshot = await getDocs(q);
-// querySnapshot.forEach((doc) => {
-//   // doc.data() is never undefined for query doc snapshots
-//   console.log(doc.id, " => ", doc.data());
-// });
+  const phnQuery = query(studentRef, where("phone", "==", mobile));
+  const rollQuery = query(studentRef, where("roll_no", "==", rollNo));
 
-export async function CheckUsrPhnInDb(mobile, rollNo) {
-  // const studentRef = appdb.collection("users");
 
-  const checkUsrPhnNo = query(
-    collection(appdb, "users"),
-    where("phone", "==", mobile)
-  );
-  const checkUsrRollNo = query(
-    collection(appdb, "users"),
-    where("roll_no", "==", rollNo)
-  );
+  const usrPhnExists = await getDocs(phnQuery)
+  const usrollExists = await getDocs(rollQuery)
 
-  const checkUsr = queryEqual(checkUsrPhnNo, checkUsrRollNo);
+  let shouldsign 
 
-  if (checkUsr) {
-    const querySnapshot = await getDocs(checkUsrPhnNo);
+  if(usrPhnExists.empty || usrollExists.empty){
+    console.log("the user doesnt exist")
+    shouldsign = true
+  }else{
+    usrPhnExists.forEach((doc)=>{
 
-    if (querySnapshot.empty) {
-      console.log("No matching documents.");
-      return true;
-    } else {
-      console.log("The User already exists");
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, "=>", doc.data());
-      });
-    }
+      if(doc.id){
+        console.log("the user exists", doc.id)
+      }
+      shouldsign = false
+    })
   }
+  return shouldsign
+}
+
+export const CheckUsrPhnInDbForSignin = async (mobile) => {
+  const studentRef = collection(appdb, "users");
+
+  const phnQuery = query(studentRef, where("phone", "==", mobile));
+
+
+  const usrPhnExists = await getDocs(phnQuery)
+
+  let shouldsign 
+
+  if(usrPhnExists.empty){
+    console.log("the user doesnt exist")
+    shouldsign = true
+  }else{
+    usrPhnExists.forEach((doc)=>{
+
+      if(doc.id){
+        console.log("the user exists", doc.id)
+      }
+      shouldsign = false
+    })
+  }
+  return shouldsign
 }
 
 export const createUserDocument = async (
