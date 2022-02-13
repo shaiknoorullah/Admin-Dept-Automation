@@ -6,7 +6,6 @@ import { confirmOTP, sendOTP } from "./userAuth";
 import Otpmodal from "./otpmodal";
 import { createUserDocument, CheckUsrPhnInDb } from "./database";
 import toast from "react-hot-toast";
-import { onSignUpSubmit } from "./signupauth";
 import {
   Modal,
   ModalOverlay,
@@ -44,17 +43,15 @@ export default function Signup() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let signInReturn = await sendOTP(mobile);
     // check if number exists in DB
-    let Check = CheckUsrPhnInDb(mobile, rollNo).then(() => {
-      return true;
-    });
-
-    if (Check==true) {
+    let Check = await CheckUsrPhnInDb(mobile, rollNo)
+    if (Check===true) {
       // authenticate phone number
+      console.log("js was here")
+      let signInReturn = await sendOTP(mobile);
       setConfirmResult(signInReturn);
       setIsModalOpen(true);
-    }else{
+    }else if(Check===false){
       console.log("you are already registered, Please Login")
       setIsModalOpen(false)
       toast.error("user already registered")

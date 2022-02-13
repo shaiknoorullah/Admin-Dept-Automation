@@ -26,6 +26,7 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
 } from "firebase/auth";
+import { CheckUsrPhnInDb, CheckUsrPhnInDbForSignin } from "./database";
 
 const auth = getAuth(app);
 
@@ -42,11 +43,17 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // check if number exists in DB
-    // authenticate phone number
-    // create user document
-    let signInReturn = await sendOTP(number);
-    setConfirmResult(signInReturn);
-    setIsModalOpen(true);
+    const check = await CheckUsrPhnInDbForSignin(number)
+    if(check===false){
+      
+      // authenticate phone number
+      let signInReturn = await sendOTP(number);
+      setConfirmResult(signInReturn);
+      setIsModalOpen(true);
+    }else{
+      console.log("You are not a user bitch! go signup")
+      return
+    }
   };
 
   const handleOTPChange = (value) => {
