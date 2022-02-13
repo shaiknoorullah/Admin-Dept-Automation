@@ -6,7 +6,6 @@ import { confirmOTP, sendOTP } from "./userAuth";
 import Otpmodal from "./otpmodal";
 import { createUserDocument, CheckUsrPhnInDb } from "./database";
 import toast from "react-hot-toast";
-import { onSignUpSubmit } from "./signupauth";
 import {
   Modal,
   ModalOverlay,
