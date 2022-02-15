@@ -116,7 +116,7 @@ export default function Signup() {
   return (
     <div>
       <Box>
-        <Otpmodal
+        <Otpmodal position={'absolute'}
           isOpen={isModalOpen}
           handleOTPChange={handleOTPChange}
           handleOTPSubmit={handleOTPSubmit}
