@@ -76,6 +76,7 @@ export default function Login() {
     confirmOTP(confirmResult, userOTP)
       ? setIsModalOpen(false)
       : console.log("hello");
+      otpcorrectToast();
   };
 
   // for toast
@@ -95,6 +96,12 @@ export default function Login() {
   function errorToast() {
     toastIdRef.current = toast({ title: 'Error',description: 'You are not a User, Please Signup first',status:'error', })
   }
+
+  function otpcorrectToast() {
+    toastIdRef.current = toast({ title: 'OTP Correct',description: 'OTP Matched',status:'success', })
+  }
+
+
   
   return (
     <div>
