@@ -13,7 +13,6 @@ export function validation(val) {
   if (numberPattern.test(phoneCheck)) {
     button.disabled = false;
   } else {
-    val.target.classList.add("border-red-600");
     button.disabled = true;
   }
 }
