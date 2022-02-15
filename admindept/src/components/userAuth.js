@@ -9,21 +9,6 @@ import {
 import { CheckUsrPhnInDb } from "./database";
 import Otpmodal from "./otpmodal";
 
-export function loading() {
-  const loading = document.getElementById("loading");
-  const otpText = document.getElementById("otptext");
-  loading.classList.remove("hidden");
-  otpText.textContent = "Processing";
-}
-
-export function notLoading() {
-  const loading = document.getElementById("loading");
-  const tick = document.getElementById("tick");
-  const otpText = document.getElementById("otptext");
-  loading.classList.add("hidden");
-  otpText.textContent = "OTPSent";
-  tick.classList.remove("hidden");
-}
 
 const auth = getAuth(app);
 

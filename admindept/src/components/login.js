@@ -30,6 +30,7 @@ import {
   Box,
   Button,
   Center,
+  useToast,
 } from "@chakra-ui/react";
 import { app } from "../utils/firebase";
 import {
@@ -59,8 +60,11 @@ export default function Login() {
       let signInReturn = await sendOTP(number);
       setConfirmResult(signInReturn);
       setIsModalOpen(true);
+      otpToast();
     } else {
+      
       console.log("You are not a user bitch! go signup");
+      errorToast();
       return;
     }
   };
@@ -76,6 +80,24 @@ export default function Login() {
       : console.log("hello");
   };
 
+  // for toast
+  const toast = useToast({
+    position: 'top-right',
+    containerStyle: {
+      width: '200px',
+      maxWidth: '100%',
+    },
+  })
+  const toastIdRef = React.useRef()
+
+  function otpToast() {
+    toastIdRef.current = toast({ title: 'OTP Sent', description: 'OTP sent',status:'success'})
+  }
+
+  function errorToast() {
+    toastIdRef.current = toast({ title: 'Error',description: 'You are not a User',status:'error', })
+  }
+  
   return (
     <div>
       {/*Wrapper Full */}
