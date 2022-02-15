@@ -4,11 +4,13 @@ import { ChakraProvider } from '@chakra-ui/react'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Routes from './Routes';
+import Navigate from './Routes';
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-    <App />
+     <Navigate/>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
