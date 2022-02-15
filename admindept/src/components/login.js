@@ -62,8 +62,6 @@ export default function Login() {
       setIsModalOpen(true);
       otpToast();
     } else {
-      
-      console.log("You are not a user bitch! go signup");
       errorToast();
       return;
     }
@@ -95,7 +93,7 @@ export default function Login() {
   }
 
   function errorToast() {
-    toastIdRef.current = toast({ title: 'Error',description: 'You are not a User',status:'error', })
+    toastIdRef.current = toast({ title: 'Error',description: 'You are not a User,Please Signup first',status:'error', })
   }
   
   return (
