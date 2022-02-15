@@ -111,7 +111,7 @@ export default function Signup() {
       otpError()
     }
   };
-
+// Rendering from here
   return (
     <div>
       <Box>
@@ -122,14 +122,13 @@ export default function Signup() {
         />
         {/*Left SVG and BG */}
         <Flex>
-          <Center bg={"#2455D6"} width={"100vh"} height={"100vh"}>
+          <Center bg={"#2455D6"} width={"100vw"} height={"100vh"} position={['absolute','absolute','absolute','relative']}  display={['none','none','none','flex']}>
             <Image src={Top} px={"20"}></Image>
           </Center>
-
           {/*Form Area */}
-          <Center height={"100vh"} px={"20"}>
-            <Stack>
-              <Heading as="h1" size="xl">
+          <Center height={"100vh"} width={'100vw'} px={['10','20','20']} bg={['#2455D6','#2455D6','#2455D6','transparent']}>
+            <Stack color={['white','white','white','black']}>
+              <Heading as="h1" size="xl" >
                 Signup
               </Heading>
               <Text fontSize="md" pb={"10"}>
@@ -137,8 +136,8 @@ export default function Signup() {
               </Text>
               <Box>
                 <form onSubmit={handleSubmit}>
-                  <FormControl size={"md"} width={"md"} isRequired>
-                    <FormLabel htmlFor="tel">Student Name</FormLabel>
+                  <FormControl maxWidth={['sm','sm','md']} isRequired color={['white','white','white','black']}>
+                    <FormLabel htmlFor="tel" >Student Name</FormLabel>
                     <Input
                       type="text"
                       placeholder="Enter Your Full Name"
@@ -150,7 +149,7 @@ export default function Signup() {
                     />
                     <FormLabel htmlFor="tel">Phone Number</FormLabel>
                     <InputGroup>
-                      <InputLeftAddon children="+91" />
+                      <InputLeftAddon children="+91" color={['black','black','black','black']}/>
                       <Input
                         type="tel"
                         placeholder="Enter Your Phone Number"
@@ -181,10 +180,10 @@ export default function Signup() {
                     />
                     <Button
                       type="Submit"
-                      width={"md"}
+                      width={['sm','sm','md']}
                       my={"5"}
-                      bg={"#2455D6"}
-                      color={"white"}
+                      bg={['white','white','white',"#2455D6"]}
+                      color={["#2455D6","#2455D6","#2455D6","white"]}
                       _hover={{ bg: "blue.900" }}
                       id={"recaptcha-container"}
                     >
