@@ -75,8 +75,7 @@ export default function Login() {
     // console.log(confirmOTP(confirmResult, userOTP));
     confirmOTP(confirmResult, userOTP)
       ? setIsModalOpen(false)
-      : console.log("hello");
-      otpcorrectToast();
+      : otpcorrectToast();
   };
 
   // for toast
