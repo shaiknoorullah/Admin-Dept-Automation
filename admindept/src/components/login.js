@@ -93,7 +93,7 @@ export default function Login() {
   }
 
   function errorToast() {
-    toastIdRef.current = toast({ title: 'Error',description: 'You are not a User,Please Signup first',status:'error', })
+    toastIdRef.current = toast({ title: 'Error',description: 'You are not a User, Please Signup first',status:'error', })
   }
   
   return (
