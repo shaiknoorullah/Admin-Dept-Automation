@@ -14,6 +14,7 @@ import {
   InputLeftAddon,
   Heading,
   Input,
+  useToast
 } from "@chakra-ui/react";
 import {
   Modal,
@@ -53,20 +54,45 @@ export default function Signup() {
     setUserData({ ...userData, [name]: event.target.value });
   };
 
+  // for toast
+  const toast = useToast({
+    position: 'top-right',
+    containerStyle: {
+      width: '200px',
+      maxWidth: '100%',
+    },
+  })
+  const toastIdRef = React.useRef()
+
+  function otpToast() {
+    toastIdRef.current = toast({ title: 'OTP Sent', description: 'OTP sent',status:'success'})
+  }
+  function errorToast() {
+    toastIdRef.current = toast({ title: 'Error',description: 'You are already a user, please Sign in',status:'error', })
+  }
+  
+  function otpError() {
+    toastIdRef.current = toast({ title: 'OTP wrong',description: 'OTP Mismatched',status:'error', })
+  }
+
+  function signupSuccessful() {
+    toastIdRef.current = toast({ title: 'Signup Successful',description: 'You are a user now, Sign in and rock',status:'success', })
+  }
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     // check if number exists in DB
     let Check = await CheckUsrPhnInDb(mobile, rollNo);
     if (Check === true) {
       // authenticate phone number
-      console.log("js was here");
+      otpToast()
       let signInReturn = await sendOTP(mobile);
       setConfirmResult(signInReturn);
       setIsModalOpen(true);
     } else if (Check === false) {
-      console.log("you are already registered, Please Login");
       setIsModalOpen(false);
-      console.log("user already registered");
+      errorToast()
+
     }
   };
 
@@ -79,9 +105,10 @@ export default function Signup() {
     let result = await confirmOTP(confirmResult, userOTP);
     if (result) {
       setIsModalOpen(false);
+      signupSuccessful()
       createUserDocument(studentName, mobile, email, rollNo);
     } else {
-      console.log("hello");
+      otpError()
     }
   };
 

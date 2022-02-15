@@ -5,7 +5,7 @@ import { ChakraProvider } from "@chakra-ui/provider";
 function App() {
   return (
     <ChakraProvider>
-      <Login />
+      <Signup />
     </ChakraProvider>
   );
 }
