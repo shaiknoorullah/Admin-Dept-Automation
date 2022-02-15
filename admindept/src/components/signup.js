@@ -200,6 +200,9 @@ export default function Signup() {
                     </Button>
                   </FormControl>
                 </form>
+                <Box display={'flex'} justifyContent={'center'}>
+                  Already a User? Sign In
+                </Box>
               </Box>
             </Stack>
           </Center>

@@ -155,6 +155,9 @@ export default function Login() {
                     </Button>
                   </FormControl>
                 </form>
+                <Box display={'flex'} justifyContent={'center'}>
+                  Not a User? Sign Up
+                </Box>
               </Box>
             </Stack>
           </Center>
