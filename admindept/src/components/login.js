@@ -40,13 +40,13 @@ import {
 import { CheckUsrPhnInDb, CheckUsrPhnInDbForSignin } from "./database";
 
 export default function Login() {
-  const [number, setNumber] = useState("");
+  let [number, setNumber] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirmResult, setConfirmResult] = useState();
   const [userOTP, setUserOTP] = useState("");
 
   const handleChange = (event) => {
-    setNumber(event.target.value);
+    setNumber("+91" + event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -112,7 +112,7 @@ export default function Login() {
                         errorBorderColor="crimson"
                         id="mobile"
                         onChange={handleChange}
-                        value={number}
+                        // value={number}
                         isInvalid={false}
                       />
                     </InputGroup>
