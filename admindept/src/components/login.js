@@ -127,7 +127,7 @@ export default function Login() {
                 A Mobile number here and an OTP there. Eazee-Peezee
               </Text>
               <Box>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} onChange={validation}>
                   <FormControl>
                     <FormLabel htmlFor="tel">Phone Number</FormLabel>
                     <InputGroup size={"md"} width={"md"}>

@@ -16,6 +16,7 @@ import {
   Input,
   useToast
 } from "@chakra-ui/react";
+import logowhite from '../img/logo 1.png'
 import {
   Modal,
   ModalOverlay,
@@ -125,6 +126,9 @@ export default function Signup() {
           <Center bg={"#2455D6"} width={"100vw"} height={"100vh"} position={['absolute','absolute','absolute','relative']}  display={['none','none','none','flex']}>
             <Image src={Top} px={"20"}></Image>
           </Center>
+          <Stack display={'flex'}>
+            <Image src={logowhite} px={"10"} py={'20.5'} position={'absolute'} display={['flex','flex','flex','none']} ></Image>
+          </Stack>
           {/*Form Area */}
           <Center height={"100vh"} width={'100vw'} px={['10','20','20']} bg={['#2455D6','#2455D6','#2455D6','transparent']}>
             <Stack color={['white','white','white','black']}>
@@ -135,13 +139,14 @@ export default function Signup() {
                 Create your account here
               </Text>
               <Box>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} onChange={validation}>
                   <FormControl maxWidth={['sm','sm','md']} isRequired color={['white','white','white','black']}>
                     <FormLabel htmlFor="tel" >Student Name</FormLabel>
                     <Input
                       type="text"
                       placeholder="Enter Your Full Name"
                       errorBorderColor="crimson"
+                      _placeholder={{ color: ['#9BB5F5','#9BB5F5','#9BB5F5','#B7B7B7' ]}}
                       id="name"
                       mb={"20px"}
                       onChange={handleChange("studentName")}
@@ -154,6 +159,7 @@ export default function Signup() {
                         type="tel"
                         placeholder="Enter Your Phone Number"
                         errorBorderColor="crimson"
+                        _placeholder={{ color: ['#9BB5F5','#9BB5F5','#9BB5F5','#B7B7B7' ]}}
                         id="mobile"
                         mb={"20px"}
                         onChange={handleChange("mobile")}
@@ -164,6 +170,7 @@ export default function Signup() {
                     <Input
                       type="text"
                       placeholder="Enter Your E-mail"
+                      _placeholder={{ color: ['#9BB5F5','#9BB5F5','#9BB5F5','#B7B7B7' ]}}
                       errorBorderColor="crimson"
                       id="email"
                       mb={"20px"}
@@ -174,6 +181,7 @@ export default function Signup() {
                     <Input
                       placeholder="Enter Your Full Roll No."
                       errorBorderColor="crimson"
+                      _placeholder={{ color: ['#9BB5F5','#9BB5F5','#9BB5F5','#B7B7B7' ]}}
                       id="rollno"
                       onChange={handleChange("rollNo")}
                       value={rollNo}
@@ -186,6 +194,7 @@ export default function Signup() {
                       color={["#2455D6","#2455D6","#2455D6","white"]}
                       _hover={{ bg: "blue.900" }}
                       id={"recaptcha-container"}
+                      onChange={validation}
                     >
                       Submit
                     </Button>
