@@ -35,6 +35,7 @@ import Otpmodal from "./otpmodal";
 import { createUserDocument, CheckUsrPhnInDb } from "./database";
 import Top from "../img/top.svg";
 import mbbg from "../img/mbbg.svg";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -201,7 +202,7 @@ export default function Signup() {
                   </FormControl>
                 </form>
                 <Box display={'flex'} justifyContent={'center'}>
-                  Already a User? Sign In
+                  Already a User? <Link to="/" >Sign In</Link>
                 </Box>
               </Box>
             </Stack>

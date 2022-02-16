@@ -8,16 +8,10 @@ export default function Navigate() {
   return (
     
   <div>
-  <BrowserRouter>
     <Routes>
-      <Route path="/login">
-      <Login/>
-      </Route>
-     <Route path="/signup" exact >
-     <Signup/>
-     </Route>
+      <Route path="/" element={<Login/>}/>
+      <Route path="/signup" element={<Signup/>} />
     </Routes>
-  </BrowserRouter>
   </div>
   )
 }

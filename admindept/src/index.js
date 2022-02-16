@@ -6,11 +6,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Routes from './Routes';
 import Navigate from './Routes';
+import {BrowserRouter as Router} from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-     <Navigate/>
+      <Router>
+         <App/>
+      </Router>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')

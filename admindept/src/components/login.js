@@ -39,6 +39,7 @@ import {
   signInWithPhoneNumber,
 } from "firebase/auth";
 import { CheckUsrPhnInDb, CheckUsrPhnInDbForSignin } from "./database";
+import {Link} from 'react-router-dom'
 
 export default function Login() {
   let [number, setNumber] = useState("");
@@ -156,7 +157,7 @@ export default function Login() {
                   </FormControl>
                 </form>
                 <Box display={'flex'} justifyContent={'center'}>
-                  Not a User? Sign Up
+                  Not a User? <Link to="/signup" >Sign Up</Link>
                 </Box>
               </Box>
             </Stack>
