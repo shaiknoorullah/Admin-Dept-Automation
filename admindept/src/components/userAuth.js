@@ -8,6 +8,8 @@ import {
 } from "firebase/auth";
 import { CheckUsrPhnInDb } from "./database";
 import Otpmodal from "./otpmodal";
+import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
 
 
 const auth = getAuth(app);
@@ -49,11 +51,13 @@ export const sendOTP = (mobile) => {
 };
 
 export const confirmOTP = async (confirmResult, userOTP) => {
+  let userId
   const result = await confirmResult
     .confirm(userOTP)
     .then((result) => {
       // User signed in successfully.
       const user = result.user;
+      userId = user
       console.log(user, "is signed in!");
       return true;
     })
@@ -62,7 +66,11 @@ export const confirmOTP = async (confirmResult, userOTP) => {
       console.error(error);
       return false;
     });
-  return result;
+
+    if(result===true&&userId!=null){
+      return userId.uid
+    }
+  
 };
 
 // Signout the user

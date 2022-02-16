@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Top from "../img/top.svg";
 import mbbg from "../img/mbbg.svg";
 import { confirmOTP, sendOTP } from "./userAuth";
+import { Navigate } from 'react-router-dom';
 import { validation } from "./validate";
 import Otpmodal from "./otpmodal.js";
 import {
@@ -40,12 +41,17 @@ import {
 } from "firebase/auth";
 import { CheckUsrPhnInDb, CheckUsrPhnInDbForSignin } from "./database";
 import {Link} from 'react-router-dom'
+import Dashboard from "./dashboard";
 
 export default function Login() {
   let [number, setNumber] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirmResult, setConfirmResult] = useState();
   const [userOTP, setUserOTP] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState("")
+
+  
 
   const handleChange = (event) => {
     setNumber("+91" + event.target.value);
@@ -61,6 +67,7 @@ export default function Login() {
       let signInReturn = await sendOTP(number);
       setConfirmResult(signInReturn);
       setIsModalOpen(true);
+
       otpToast();
     } else {
       errorToast();
@@ -72,13 +79,41 @@ export default function Login() {
     setUserOTP(value);
   };
 
-  const handleOTPSubmit = () => {
-    // console.log(confirmOTP(confirmResult, userOTP));
-    confirmOTP(confirmResult, userOTP)
-      ? setIsModalOpen(false)
-      : otpcorrectToast();
-  };
+  const loginUser = ()=>{
+    if(isLoggedIn===true){
+      console.log("hi im in LoginUser")
+      return <Navigate to='/dashboard'/>
+    }
+  }
 
+  const handleOTPSubmit = async () => {
+    // console.log(confirmOTP(confirmResult, userOTP));
+   let User = await confirmOTP(confirmResult, userOTP)
+    console.log(User)
+   if(User){
+
+    setIsModalOpen(false)
+    otpcorrectToast(); 
+    setUserId(User)
+    // setIsLoggedIn(true)
+    console.log("isloggedin?", isLoggedIn)
+    loginUser()
+    // <Redirect to="/dashboard"/>
+    // Dashboard({isLoggedIn})
+  
+    console.log("This is user", userId)
+
+  //   if (isLoggedIn) {
+  //     <Redirect to='/dashboard' />
+  //    }
+  //    console.log("User is Logger in", User)
+  //  }
+  };
+  }
+
+  
+  
+  
   // for toast
   const toast = useToast({
     position: 'top-right',
