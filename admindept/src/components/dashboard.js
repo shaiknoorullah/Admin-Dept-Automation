@@ -11,10 +11,20 @@ import { Flex, Spacer,Image, Stack ,Text,FormControl,FormLabel,InputGroup, Input
     Box,
     Button,
     Center,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuItemOption,
+    MenuGroup,
+    MenuOptionGroup,
+    MenuDivider,
     } from '@chakra-ui/react'
     import logo from '../img/logo 1.png'
-    // import avatar from '../img/avatar.png'
-    // import waiting from '../img/waiting.svg'
+    import avatar from '../img/avatar.png'
+    import waiting from '../img/waiting.svg'
+    import {ChevronDownIcon } from '@chakra-ui/icons'
+    import {UsrSignOut} from '../components/userAuth'
     
 export default function Dashboard() {
 
@@ -36,7 +46,18 @@ export default function Dashboard() {
                     Abid
                 </Box>
                 <Box>
-                    {/* <Image src={avatar} width={'5.5rem'} padding={'1rem'}></Image> */}
+                    <Image src={avatar} width={'5.5rem'} padding={'1rem'}></Image>
+                </Box>
+                <Box>
+                <Menu>
+                <MenuButton as={Button} rightIcon={<ChevronDownIcon />} backgroundColor={'white'} textColor={'#2455D6'}>
+                Actions
+                </MenuButton>
+                <MenuList>
+                <MenuItem textColor={'gray.500'}>Profile</MenuItem>
+                <MenuItem color={'red.500'} onClick={UsrSignOut}>Sign out</MenuItem>
+                </MenuList>
+                </Menu>
                 </Box>
             </Flex>
         </Box>
@@ -114,7 +135,7 @@ export default function Dashboard() {
                 {/* Right Illustration */}
                 <Spacer></Spacer>
                 <Box paddingRight={'3rem'}>
-                    {/* <Image src={waiting}></Image> */}
+                    <Image src={waiting}></Image>
                 </Box>
             </Flex>
         </Box>
