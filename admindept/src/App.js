@@ -21,7 +21,7 @@ function App() {
             </Route>
             <Route exact path="/signup">
               {!user&& <Signup/> }
-              {user&& <Login/> }
+              {user&& <Dashboard/> }
             </Route>
             <Route exact path="/dashboard">
               {!user&& <Redirect to='/'/> }
