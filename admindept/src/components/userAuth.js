@@ -61,9 +61,11 @@ export const confirmOTP = async (confirmResult, userOTP) => {
 // Signout the user
 
 export const UsrSignOut = () => {
-  signOut = auth
+  signOut(auth)
     .then(() => {
       // Sign-out successful.
+      console.log("signed out")
+      window.location.reload()
     })
     .catch((error) => {
       // An error happened.
