@@ -5,6 +5,7 @@ import { confirmOTP, sendOTP } from "./userAuth";
 import { Navigate } from 'react-router-dom';
 import { validation } from "./validate";
 import Otpmodal from "./otpmodal.js";
+import logowhite from '../img/logo 1.png'
 import {
   Flex,
   Spacer,
@@ -132,13 +133,15 @@ export default function Login() {
         />
         {/*Left SVG and BG */}
         <Flex>
-          <Center bg={"#2455D6"} width={"100vh"} height={"100vh"}>
+          <Center bg={"#2455D6"} width={"100vw"} height={"100vh"} position={['absolute','absolute','absolute','relative']}  display={['none','none','none','flex']}>
             <Image src={Top} px={"20"}></Image>
           </Center>
-
+          <Stack display={'flex'} >
+            <Image src={logowhite} px={"10"} py={'20.5'} position={'absolute'} display={['flex','flex','flex','none']} ></Image>
+          </Stack>
           {/*Form Area */}
-          <Center height={"100vh"} px={"20"}>
-            <Stack>
+          <Center height={"100vh"} px={"20"} width={'100vw'} px={['10','20','20']} bg={['#2455D6','#2455D6','#2455D6','transparent']}>
+            <Stack color={['white','white','white','black']}>
               <Heading as="h1" size="xl">
                 Login
               </Heading>
@@ -147,14 +150,15 @@ export default function Login() {
               </Text>
               <Box>
                 <form onSubmit={handleSubmit} onChange={validation}>
-                  <FormControl>
+                  <FormControl maxWidth={['sm','sm','md']} color={['white','white','white','black']}>
                     <FormLabel htmlFor="tel">Phone Number</FormLabel>
-                    <InputGroup size={"md"} width={"md"}>
-                      <InputLeftAddon children="+91" />
+                    <InputGroup >
+                      <InputLeftAddon children="+91" color={['black','black','black','black']}/>
                       <Input
                         type="tel"
                         placeholder="Enter Your phone number"
                         errorBorderColor="crimson"
+                        _placeholder={{ color: ['#9BB5F5','#9BB5F5','#9BB5F5','#B7B7B7' ]}}
                         id="mobile"
                         onChange={handleChange}
                         // value={number}
@@ -163,11 +167,12 @@ export default function Login() {
                     </InputGroup>
                     <Button
                       type="Submit"
-                      width={"md"}
+                      width={['sm','sm','md']}
+                      backgroundColor={['white','white','white',"#2455D6"]}
+                      color={["#2455D6","#2455D6","#2455D6","white"]}
                       my={"5"}
                       bg={"#2455D6"}
-                      color={"white"}
-                      _hover={{ bg: "blue.900" }}
+                      _hover={{ bg: ["blue.900" ]}}
                       id={"recaptcha-container"}
                     >
                       Submit
@@ -175,7 +180,7 @@ export default function Login() {
                   </FormControl>
                 </form>
                 <Box display={'flex'} justifyContent={'center'}>
-                  Not a User? <Link to="/signup" ><Text textColor={'blue'}>&nbsp;Sign Up</Text></Link>
+                 <Text textColor={['#DCE6FF','#DCE6FF','#DCE6FF','black']}> Not a User?</Text> <Link to="/signup" ><Text textColor={['white','white','white','blue']}>&nbsp;Sign Up</Text></Link>
                 </Box>
               </Box>
             </Stack>

@@ -202,7 +202,7 @@ export default function Signup() {
                   </FormControl>
                 </form>
                 <Box display={'flex'} justifyContent={'center'}>
-                  Already a User? <Link to="/" ><Text textColor={'blue'}>&nbsp;Sign In</Text></Link>
+                  <Text textColor={['#DCE6FF','#DCE6FF','#DCE6FF','black']}> Already a User?</Text> <Link to="/" ><Text textColor={['white','white','white','blue']}>&nbsp;Sign In</Text></Link>
                 </Box>
               </Box>
             </Stack>
