@@ -175,8 +175,7 @@ export default function Login() {
                   </FormControl>
                 </form>
                 <Box display={'flex'} justifyContent={'center'}>
-                  Not a User? Signup
-                  {/* <Link to="/signup" >Sign Up</Link> */}
+                  Not a User? <Link to="/signup" ><Text textColor={'blue'}>&nbsp;Sign Up</Text></Link>
                 </Box>
               </Box>
             </Stack>
