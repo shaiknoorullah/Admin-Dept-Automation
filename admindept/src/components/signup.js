@@ -62,23 +62,24 @@ export default function Signup() {
     containerStyle: {
       width: '200px',
       maxWidth: '100%',
+      isClosable: true,
     },
   })
   const toastIdRef = React.useRef()
 
   function otpToast() {
-    toastIdRef.current = toast({ title: 'OTP Sent', description: 'OTP sent',status:'success'})
+    toastIdRef.current = toast({ title: 'OTP Sent', description: 'OTP sent',status:'success',isClosable: true})
   }
   function errorToast() {
-    toastIdRef.current = toast({ title: 'Error',description: 'You are already a user, please Sign in',status:'error', })
+    toastIdRef.current = toast({ title: 'Error',description: 'You are already a user, please Sign in',status:'error', isClosable: true,})
   }
   
   function otpError() {
-    toastIdRef.current = toast({ title: 'OTP wrong',description: 'OTP Mismatched',status:'error', })
+    toastIdRef.current = toast({ title: 'OTP wrong',description: 'OTP Mismatched',status:'error', isClosable: true,})
   }
 
   function signupSuccessful() {
-    toastIdRef.current = toast({ title: 'Signup Successful',description: 'You are a user now, Sign in and rock',status:'success', })
+    toastIdRef.current = toast({ title: 'Signup Successful',description: 'You are a user now, Sign in and rock',status:'success',isClosable: true, })
   }
   
   const handleSubmit = async (event) => {

@@ -5,6 +5,7 @@ import { ChakraProvider } from "@chakra-ui/provider";
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import Dashboard from "./components/dashboard.js";
 import {useAuthContext} from './hooks/useAuthContext'
+import Query from "./components/query.js";
 
 function App() {
   const { authIsReady, user } = useAuthContext()

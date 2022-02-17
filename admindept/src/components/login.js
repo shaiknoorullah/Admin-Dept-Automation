@@ -109,15 +109,15 @@ export default function Login() {
   const toastIdRef = React.useRef()
 
   function otpToast() {
-    toastIdRef.current = toast({ title: 'OTP Sent', description: 'OTP sent',status:'success'})
+    toastIdRef.current = toast({ title: 'OTP Sent', description: 'OTP sent',status:'success',isClosable: true})
   }
 
   function errorToast() {
-    toastIdRef.current = toast({ title: 'Error',description: 'You are not a User, Please Signup first',status:'error', })
+    toastIdRef.current = toast({ title: 'Error',description: 'You are not a User, Please Signup first',status:'error', isClosable: true})
   }
 
   function otpcorrectToast() {
-    toastIdRef.current = toast({ title: 'OTP Correct',description: 'OTP Matched',status:'success', })
+    toastIdRef.current = toast({ title: 'OTP Correct',description: 'OTP Matched',status:'success', isClosable: true,})
   }
 
 
