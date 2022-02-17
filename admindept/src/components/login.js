@@ -41,16 +41,16 @@ import {
 } from "firebase/auth";
 import { CheckUsrPhnInDb, CheckUsrPhnInDbForSignin } from "./database";
 import {Link} from 'react-router-dom'
-import Dashboard from "./dashboard";
+import {useAuthContext} from '../hooks/useAuthContext'
+
 
 export default function Login() {
   let [number, setNumber] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirmResult, setConfirmResult] = useState();
   const [userOTP, setUserOTP] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState("")
-
+  const { dispatch } = useAuthContext()
+  const [isUser, setIsUser] = useState({})
   
 
   const handleChange = (event) => {
@@ -79,35 +79,18 @@ export default function Login() {
     setUserOTP(value);
   };
 
-  const loginUser = ()=>{
-    if(isLoggedIn===true){
-      console.log("hi im in LoginUser")
-      return <Navigate to='/dashboard'/>
-    }
-  }
 
   const handleOTPSubmit = async () => {
     // console.log(confirmOTP(confirmResult, userOTP));
    let User = await confirmOTP(confirmResult, userOTP)
     console.log(User)
    if(User){
-
+    setIsUser(User)
     setIsModalOpen(false)
     otpcorrectToast(); 
-    setUserId(User)
-    // setIsLoggedIn(true)
-    console.log("isloggedin?", isLoggedIn)
-    loginUser()
-    // <Redirect to="/dashboard"/>
-    // Dashboard({isLoggedIn})
-  
-    console.log("This is user", userId)
+    dispatch({type: 'LOGIN', payload: User})
 
-  //   if (isLoggedIn) {
-  //     <Redirect to='/dashboard' />
-  //    }
-  //    console.log("User is Logger in", User)
-  //  }
+
   };
   }
 
@@ -192,7 +175,8 @@ export default function Login() {
                   </FormControl>
                 </form>
                 <Box display={'flex'} justifyContent={'center'}>
-                  Not a User? <Link to="/signup" >Sign Up</Link>
+                  Not a User? Signup
+                  {/* <Link to="/signup" >Sign Up</Link> */}
                 </Box>
               </Box>
             </Stack>

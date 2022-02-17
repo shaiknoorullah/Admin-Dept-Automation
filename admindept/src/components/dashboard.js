@@ -17,16 +17,8 @@ import { Flex, Spacer,Image, Stack ,Text,FormControl,FormLabel,InputGroup, Input
     // import waiting from '../img/waiting.svg'
     
 export default function Dashboard() {
-    
-    // const checkUserState = async () =>{
-        //   if(isLoggedIn===true){
-      
-        //   }else{
-        //     checkUserState()
-        //   }
-        // }
 
-  return console.log("hi") (
+  return (
       
     <div>
 

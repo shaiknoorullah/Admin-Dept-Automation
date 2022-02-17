@@ -4,29 +4,15 @@ import {
   RecaptchaVerifier,
   signOut,
   confirmationResult,
-  signInWithPhoneNumber,
+  signInWithPhoneNumber
 } from "firebase/auth";
 import { CheckUsrPhnInDb } from "./database";
 import Otpmodal from "./otpmodal";
-import { useNavigate } from "react-router-dom";
 import React, {useState} from "react";
 
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
-// Submit Phone Number && verify recaptcha && send otp
-export const submitPhn = null;
-// export const onSignInSubmit = (mobile) => {
-//   // e.preventDefault();
-//   // store user phone number
-//   // const mobile = e.target.mobile.value;
-//   CheckUsrPhnInDb(mobile)
-//   .then(submitPhn(mobile))
-//   .catch(error => {
-//     console.log("The Phone Number does not exist in DB")
-//   })
-
-// };
 
 export const sendOTP = (mobile) => {
   let appVerifier = new RecaptchaVerifier(
@@ -51,13 +37,12 @@ export const sendOTP = (mobile) => {
 };
 
 export const confirmOTP = async (confirmResult, userOTP) => {
-  let userId
+  let user
   const result = await confirmResult
     .confirm(userOTP)
     .then((result) => {
       // User signed in successfully.
-      const user = result.user;
-      userId = user
+      user = result.user;
       console.log(user, "is signed in!");
       return true;
     })
@@ -67,8 +52,8 @@ export const confirmOTP = async (confirmResult, userOTP) => {
       return false;
     });
 
-    if(result===true&&userId!=null){
-      return userId.uid
+    if(result===true&&user!==null){
+      return user
     }
   
 };
