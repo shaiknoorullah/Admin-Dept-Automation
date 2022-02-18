@@ -13,15 +13,16 @@ import {
     Button,
     Center,
     Flex,
-    Select 
+    Select, 
+    FormControl
   } from "@chakra-ui/react";
 
 
 
-export default function Query() {
+export default function Query(props) {
   return (
     <div>
-        <Modal isOpen={true}>
+        <Modal isOpen={props.isOpen} size={'lg'}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader py={"6"}>
@@ -31,23 +32,26 @@ export default function Query() {
           <ModalBody>
             <Center>
               <Flex flexDirection={'column'}>
-              <Select placeholder='Select option' marginBottom={'8'} width={'sm'}>
-                <option value='option1'>Document/Scholarship</option>
-                <option value='option2'>Fee Payment</option>
-                </Select>
-                <label>Message (Optional) </label>
-                <Input placeholder='Enter Message Options' size='md' />
+                  <FormControl onSubmit={props.handleSubmit} pl={'14'}>
+
+                <Select onChange={props.handleChange} placeholder='Purpose' marginBottom={'8'} width={'sm'}>
+                    <option value='option1'>Document/Scholarship</option>
+                    <option value='option2'>Fee Payment</option>
+                    </Select>
+                    <label>Message</label>
+                    <Input onChange={props.handleChange} placeholder='Enter Message' size='md' width={'sm'} mb={'4'}/>
+                    <ModalFooter>
+                        <Center width={"md"}>
+                        <Button colorScheme="blue" mr={3} >
+                            Submit
+                        </Button>
+                        </Center>
+                    </ModalFooter>
+                  </FormControl>
               </Flex>
             </Center>
           </ModalBody>
 
-          <ModalFooter>
-            <Center width={"md"}>
-              <Button colorScheme="blue" mr={3}>
-                Submit
-              </Button>
-            </Center>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </div>

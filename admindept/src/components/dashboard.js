@@ -16,17 +16,22 @@ import avatar from "../img/avatar.png";
 import waiting from "../img/waiting.svg";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { UsrSignOut } from "../components/userAuth";
-import QueryModal from "./queryModal";
+import Query from "./query";
 import { getUsrData } from "./database";
 
 export default function Dashboard(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+    const[studentName, setStudentName] = useState("")
+  let [userData, setUserData] = useState({
+    Purpose: "",
+    Message: "",
+  })
 
-  let [userData, setUserData] = useState("");
+
 
   useEffect(() => {
     let studentname = getUsrData(props.user.phoneNumber).then((data) => {
-      setUserData(data.studentname.stringValue);
+      setStudentName(data.studentname.stringValue);
       //   console.log(userData.studentname);
       return studentname;
     });
@@ -34,24 +39,29 @@ export default function Dashboard(props) {
 
   console.log(userData);
 
-  const createQuery = () => {
+  const openQuery = () => {
     setIsModalOpen(true);
     console.log("creating query");
   };
 
-  const handleChange = () => {};
+  const handleChange = (name) => (event) => {
+    setUserData({ ...userData, [name]: event.target.value });
+  };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+      e.preventDefault()
+    setIsModalOpen(false)
+  };
 
   return (
     <div>
       {/* Top Most Container Logo and User Info */}
-      <Box>
-        <QueryModal
+        <Query
           isOpen={isModalOpen}
-          handleInputChange={handleChange}
-          handleQuerySubmit={handleSubmit}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
         />
+      <Box>
         <Flex
           backgroundColor={"#2455D6"}
           align={"center"}
@@ -64,7 +74,7 @@ export default function Dashboard(props) {
           </Box>
           <Spacer></Spacer>
           <Box paddingRight={"0.5rem"}>Welcome</Box>
-          <Box>{userData}</Box>
+          <Box>{studentName}</Box>
           <Box>
             <Image src={avatar} width={"5.5rem"} padding={"1rem"}></Image>
           </Box>
@@ -116,7 +126,7 @@ export default function Dashboard(props) {
                     backgroundColor={"#2455D6"}
                     color={"white"}
                     _hover={{ bg: "blue.900" }}
-                    onClick={createQuery}
+                    onClick={openQuery}
                   >
                     Create a Query
                   </Button>
