@@ -14,7 +14,8 @@ import {
     Center,
     Flex,
     Select, 
-    FormControl
+    FormControl,
+    Stack
   } from "@chakra-ui/react";
 
 
@@ -22,7 +23,7 @@ import {
 export default function Query(props) {
   return (
     <div>
-        <Modal isOpen={props.isOpen} size={'lg'}>
+        <Modal isOpen={props.isOpen} size={'lg'} closeOnOverlayClick={true}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader py={"6"}>
@@ -38,7 +39,9 @@ export default function Query(props) {
                     <option value='option1'>Document/Scholarship</option>
                     <option value='option2'>Fee Payment</option>
                     </Select>
+                    <Stack>
                     <label>Message</label>
+                    </Stack>
                     <Input onChange={props.handleChange} placeholder='Enter Message' size='md' width={'sm'} mb={'4'}/>
                     <ModalFooter>
                         <Center width={"md"}>
