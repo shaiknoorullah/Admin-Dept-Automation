@@ -39,7 +39,7 @@ export default function Query(props) {
                     <option value='option1'>Document/Scholarship</option>
                     <option value='option2'>Fee Payment</option>
                     </Select>
-                    <Stack>
+                    <Stack display={'block'}>
                     <label>Message</label>
                     </Stack>
                     <Input onChange={props.handleChange} placeholder='Enter Message' size='md' width={'sm'} mb={'4'}/>
