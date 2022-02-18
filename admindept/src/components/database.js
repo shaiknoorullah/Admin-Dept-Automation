@@ -51,7 +51,7 @@ export const getUsrData = async (mobile) => {
 
   const userdocument = await getDocs(phnQuery);
 
-  // shoulsign is a boolean that tells if a user could signup based on true or false
+  // shoul sign is a boolean that tells if a user could signup based on true or false
   let user = {};
 
   // Letting the user signup only if either of the queries return null
@@ -90,33 +90,19 @@ export const CheckUsrPhnInDbForSignin = async (mobile) => {
 };
 
 // This function is called to store the users data in DB
-export const createUserDocument = async (
-  studentname,
-  mobile,
-  email,
-  rollNo
-) => {
-  // If any field is empty, return an error
-  if (!studentname || !mobile || !email || !rollNo) {
-    console.log("please don't leave a blank field");
-  }
-
+export const createUserQuery = async ({ usrData }, phoneNumber) => {
   // Call a function from rollNoEval.js that evaluates info from students roll number
-  const studentData = rollNoEval(rollNo);
-  // console.log(studentData)
+
+  const Purpose = usrData.Purpose;
+  const Message = usrData.Message;
+  const userData = getUsrData(phoneNumber);
+  console.log(userData);
 
   // Sending and Storing the data
   try {
-    const userRef = await addDoc(collection(appdb, "users"), {
-      studentname: studentname,
-      phone: mobile,
-      email: email,
-      roll_no: rollNo,
-      CollegeCode: studentData.CollegeCode,
-      YearOfAdmission: studentData.YearOfAdmission,
-      Branch: studentData.Branch,
-      CurrentYear: studentData.CurrentYear,
-      ClassRollNo: studentData.ClassRollNo,
+    const userRef = await addDoc(collection(appdb, `${Purpose}`), {
+      Purpose: Purpose,
+      Message: Message,
     });
     console.log("Document written with ID: ", userRef);
   } catch (e) {
@@ -124,7 +110,12 @@ export const createUserDocument = async (
   }
 };
 
-export const createUserQuery = async (studentname, mobile, email, rollNo) => {
+export const createUserDocument = async (
+  studentname,
+  mobile,
+  email,
+  rollNo
+) => {
   // If any field is empty, return an error
   if (!studentname || !mobile || !email || !rollNo) {
     console.log("please don't leave a blank field");

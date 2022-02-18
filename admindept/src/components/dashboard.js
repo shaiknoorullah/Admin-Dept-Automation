@@ -17,20 +17,20 @@ import waiting from "../img/waiting.svg";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { UsrSignOut } from "../components/userAuth";
 import Query from "./query";
-import { getUsrData } from "./database";
+import { createUserQuery, getUsrData } from "./database";
 
 export default function Dashboard(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-    const[studentName, setStudentName] = useState("")
+  const [studentName, setStudentName] = useState("");
   let [userData, setUserData] = useState({
     Purpose: "",
     Message: "",
-  })
+  });
 
-
+  let usrPhone = props.user.phoneNumber;
 
   useEffect(() => {
-    let studentname = getUsrData(props.user.phoneNumber).then((data) => {
+    let studentname = getUsrData(usrPhone).then((data) => {
       setStudentName(data.studentname.stringValue);
       //   console.log(userData.studentname);
       return studentname;
@@ -49,18 +49,20 @@ export default function Dashboard(props) {
   };
 
   const handleSubmit = (e) => {
-      e.preventDefault()
-    setIsModalOpen(false)
+    e.preventDefault();
+    createUserQuery({ userData }, usrPhone);
+    console.log(userData);
+    setIsModalOpen(false);
   };
 
   return (
     <div>
       {/* Top Most Container Logo and User Info */}
-        <Query
-          isOpen={isModalOpen}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-        />
+      <Query
+        isOpen={isModalOpen}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
       <Box>
         <Flex
           backgroundColor={"#2455D6"}
