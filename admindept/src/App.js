@@ -8,14 +8,15 @@ import {
   Redirect,
 } from "react-router-dom";
 import Dashboard from "./components/dashboard.js";
-import { useAuthContext } from "./hooks/useAuthContext";
-import QueryModal from "./components/queryModal.js";
+import {useAuthContext} from './hooks/useAuthContext'
+import Query from "./components/query.js";
 
 function App() {
   const { authIsReady, user, mobile } = useAuthContext();
 
   return (
     <ChakraProvider>
+      {/* <Query></Query> */}
       {/* <Login/> */}
       {/* using authIsReady and user from useAuthContext()
       to route the users to dashboard if logged in */}
@@ -33,10 +34,6 @@ function App() {
             <Route exact path="/dashboard">
               {!user && <Redirect to="/" />}
               {user && <Dashboard />}
-            </Route>
-            <Route exact path="/querymodal">
-              {!user && <Redirect to="/" />}
-              {user && <QueryModal />}
             </Route>
           </Switch>
         </Router>
