@@ -1,33 +1,193 @@
-import React from 'react';
-import Top from '../img/top.svg'
+import React, { useState } from "react";
+import Top from "../img/top.svg";
+import mbbg from "../img/mbbg.svg";
+import { confirmOTP, sendOTP } from "./userAuth";
+import { Navigate } from 'react-router-dom';
+import { validation } from "./validate";
+import Otpmodal from "./otpmodal.js";
+import logowhite from '../img/logo 1.png'
+import {
+  Flex,
+  Spacer,
+  Image,
+  Stack,
+  Text,
+  FormControl,
+  FormLabel,
+  InputGroup,
+  InputLeftAddon,
+  Heading,
+  InputModal,
+  Modal,
+  Input,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  HStack,
+  ModalCloseButton,
+  PinInput,
+  PinInputField,
+  Box,
+  Button,
+  Center,
+  useToast,
+} from "@chakra-ui/react";
+import { app } from "../utils/firebase";
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from "firebase/auth";
+import { CheckUsrPhnInDb, CheckUsrPhnInDbForSignin } from "./database";
+import {Link} from 'react-router-dom'
+import {useAuthContext} from '../hooks/useAuthContext'
 
-export default function login() {
-  return <div>
-    {/*Left Column*/}
-      <div className='flex flex-row'>
-      <div className='bg-[#2455D6] basis-1/2 h-screen flex justify-center items-center'>
-              <img src={Top} alt="" className='w-4/5'/>
-          </div>
-           {/*right Column*/}
-          <div className='px-14 grid grid-flow-row gap-0 row-span-2'>
-              {/*intro Text*/}
-              <div className='grid content-center'>
-              <h2 className='font-gilroy font-semibold text-2xl'>Let’s Login, Shall we?
-              <span className='font-sofiapro font-light opacity-70 block text-lg'>
-                A roll no here and a mobile number there and login.<br />Easee-peezee
-              </span>
-              </h2>
-              </div>
-              {/*form*/}
-              <div className='grid content-start row-span-2'>
-                  <form action="" className='max-w-md mr-auto'>
-                      <label htmlFor="" className='block py-2'>Roll No:</label>
-                      <input type="text" placeholder='Enter Your Roll Number' className='pl-6 pr-44 py-[9px] border-2 rounded-md max-w-md'/>
-                      <button className='block mt-8 bg-[#4165BF] max-w-md mx-auto px-40 py-[9px] rounded-md text-white'>Get OTP</button>
-                  </form>
-              </div>
-          </div>  
-      </div>
-  </div>;
+
+export default function Login() {
+  let [number, setNumber] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [confirmResult, setConfirmResult] = useState();
+  const [userOTP, setUserOTP] = useState("");
+  const { dispatch } = useAuthContext()
+  const [isUser, setIsUser] = useState({})
+  
+
+  const handleChange = (event) => {
+    setNumber("+91" + event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // check if number exists in DB
+    const check = await CheckUsrPhnInDbForSignin(number);
+    console.log(check);
+    if (check === false) {
+      // authenticate phone number
+      let signInReturn = await sendOTP(number);
+      setConfirmResult(signInReturn);
+      setIsModalOpen(true);
+
+      otpToast();
+    } else {
+      errorToast();
+      return;
+    }
+  };
+
+  const handleOTPChange = (value) => {
+    setUserOTP(value);
+  };
+
+
+  const handleOTPSubmit = async () => {
+    // console.log(confirmOTP(confirmResult, userOTP));
+   let User = await confirmOTP(confirmResult, userOTP)
+    console.log(User)
+   if(User){
+    setIsUser(User)
+    setIsModalOpen(false)
+    otpcorrectToast(); 
+    dispatch({type: 'LOGIN', payload: User})
+
+
+  };
+  }
+
+  
+  
+  
+  // for toast
+  const toast = useToast({
+    position: 'top-right',
+    containerStyle: {
+      width: '200px',
+      maxWidth: '100%',
+    },
+  })
+  const toastIdRef = React.useRef()
+
+  function otpToast() {
+    toastIdRef.current = toast({ title: 'OTP Sent', description: 'OTP sent',status:'success',isClosable: true})
+  }
+
+  function errorToast() {
+    toastIdRef.current = toast({ title: 'Error',description: 'You are not a User, Please Signup first',status:'error', isClosable: true})
+  }
+
+  function otpcorrectToast() {
+    toastIdRef.current = toast({ title: 'OTP Correct',description: 'OTP Matched',status:'success', isClosable: true,})
+  }
+
+
+  
+  return (
+    <div>
+      {/*Wrapper Full */}
+      <Box>
+        <Otpmodal
+          isOpen={isModalOpen}
+          handleOTPChange={handleOTPChange}
+          handleOTPSubmit={handleOTPSubmit}
+        />
+        {/*Left SVG and BG */}
+        <Flex>
+          <Center bg={"#2455D6"} width={"100vw"} height={"100vh"} position={['absolute','absolute','absolute','relative']}  display={['none','none','none','flex']}>
+            <Image src={Top} px={"20"}></Image>
+          </Center>
+          <Stack display={'flex'} >
+            <Image src={logowhite} px={"10"} py={'20.5'} position={'absolute'} display={['flex','flex','flex','none']} ></Image>
+          </Stack>
+          {/*Form Area */}
+          <Center height={"100vh"} px={"20"} width={'100vw'} px={['10','20','20']} bg={['#2455D6','#2455D6','#2455D6','transparent']}>
+            <Stack color={['white','white','white','black']}>
+              <Heading as="h1" size="xl">
+                Login
+              </Heading>
+              <Text fontSize="md" pb={"10"}>
+                A Mobile number here and an OTP there. Eazee-Peezee
+              </Text>
+              <Box>
+                <form onSubmit={handleSubmit} onChange={validation}>
+                  <FormControl maxWidth={['sm','sm','md']} color={['white','white','white','black']}>
+                    <FormLabel htmlFor="tel">Phone Number</FormLabel>
+                    <InputGroup >
+                      <InputLeftAddon children="+91" color={['black','black','black','black']}/>
+                      <Input
+                        type="tel"
+                        placeholder="Enter Your phone number"
+                        errorBorderColor="crimson"
+                        _placeholder={{ color: ['#9BB5F5','#9BB5F5','#9BB5F5','#B7B7B7' ]}}
+                        id="mobile"
+                        onChange={handleChange}
+                        // value={number}
+                        isInvalid={false}
+                      />
+                    </InputGroup>
+                    <Button
+                      type="Submit"
+                      width={['sm','sm','md']}
+                      backgroundColor={['white','white','white',"#2455D6"]}
+                      color={["#2455D6","#2455D6","#2455D6","white"]}
+                      my={"5"}
+                      bg={"#2455D6"}
+                      _hover={{ bg: ["blue.900" ]}}
+                      id={"recaptcha-container"}
+                    >
+                      Submit
+                    </Button>
+                  </FormControl>
+                </form>
+                <Box display={'flex'} justifyContent={'center'}>
+                 <Text textColor={['#DCE6FF','#DCE6FF','#DCE6FF','black']}> Not a User?</Text> <Link to="/signup" ><Text textColor={['white','white','white','blue']}>&nbsp;Sign Up</Text></Link>
+                </Box>
+              </Box>
+            </Stack>
+          </Center>
+        </Flex>
+        {/*End Of Form*/}
+      </Box>
+    </div>
+  );
 }
-
