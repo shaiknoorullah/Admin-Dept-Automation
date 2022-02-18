@@ -36,7 +36,7 @@ export default function Query() {
                 <option value='option2'>Fee Payment</option>
                 </Select>
                 <label>Message (Optional) </label>
-                <Input placeholder='medium size' size='md' />
+                <Input placeholder='Enter Message Options' size='md' />
               </Flex>
             </Center>
           </ModalBody>

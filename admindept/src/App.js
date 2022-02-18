@@ -12,6 +12,7 @@ function App() {
 
   return (
     <ChakraProvider>
+      <Query></Query>
       {/* <Login/> */}
       { authIsReady &&  (
         <Router>
