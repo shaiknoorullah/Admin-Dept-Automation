@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Top from "../img/top.svg";
-import { confirmOTP, sendOTP } from "./userAuth";
-import { validation } from "./validate";
+import { confirmOTP, sendOTP } from "../fuctions/userAuth";
+import { validation } from "../fuctions/validate";
 import Otpmodal from "./otpmodal.js";
 import logowhite from "../img/logo 1.png";
 import {
@@ -20,7 +20,7 @@ import {
   Center,
   useToast,
 } from "@chakra-ui/react";
-import { CheckUsrPhnInDbForSignin } from "./database";
+import { CheckUsrPhnInDbForSignin } from "../fuctions/database";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 
@@ -82,15 +82,30 @@ export default function Login() {
   const toastIdRef = React.useRef();
 
   function otpToast() {
-    toastIdRef.current = toast({ title: 'OTP Sent', description: 'OTP sent',status:'success',isClosable: true})
+    toastIdRef.current = toast({
+      title: "OTP Sent",
+      description: "OTP sent",
+      status: "success",
+      isClosable: true,
+    });
   }
 
   function errorToast() {
-    toastIdRef.current = toast({ title: 'Error',description: 'You are not a User, Please Signup first',status:'error', isClosable: true})
+    toastIdRef.current = toast({
+      title: "Error",
+      description: "You are not a User, Please Signup first",
+      status: "error",
+      isClosable: true,
+    });
   }
 
   function otpcorrectToast() {
-    toastIdRef.current = toast({ title: 'OTP Correct',description: 'OTP Matched',status:'success', isClosable: true,})
+    toastIdRef.current = toast({
+      title: "OTP Correct",
+      description: "OTP Matched",
+      status: "success",
+      isClosable: true,
+    });
   }
 
   return (

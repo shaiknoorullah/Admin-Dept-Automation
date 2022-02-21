@@ -10,49 +10,71 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Text,
 } from "@chakra-ui/react";
 import logo from "../img/logo 1.png";
 import avatar from "../img/avatar.png";
 import waiting from "../img/waiting.svg";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { UsrSignOut } from "../components/userAuth";
+import { UsrSignOut } from "../fuctions/userAuth";
 import Query from "./query";
-import { createUserQuery, getUsrData } from "./database";
+import { createUserQuery, getUsrData, getUsrQuery } from "../fuctions/database";
+import QueryList from "./querylist";
 
 export default function Dashboard(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [studentName, setStudentName] = useState("");
-  let [userData, setUserData] = useState({
-    Purpose: "",
-    Message: "",
-  });
+  const [purpose, setPurpose] = useState("");
+  const [message, setMessage] = useState("");
+  const [isPending, setIsPending] = useState(true);
+  const [isQueryCreated, setIsQueryCreated] = useState(false);
+  //   console.log(message, "message");
 
   let usrPhone = props.user.phoneNumber;
 
+  const [userQuery, setUserQuery] = useState([]);
+
   useEffect(() => {
-    let studentname = getUsrData(usrPhone).then((data) => {
+    getUsrData(usrPhone).then((data) => {
       setStudentName(data.studentname.stringValue);
-      //   console.log(userData.studentname);
-      return studentname;
+      //   console.log(userData.studentname)
     });
   }, []);
 
-  console.log(userData);
+  useEffect(() => {
+    getUsrQuery(usrPhone).then((queries) => {
+      // setIsQueryCreated(true);
+      // console.log(queries);
+      setUserQuery(queries);
+    });
+  }, [isQueryCreated]);
+  console.log(userQuery);
 
   const openQuery = () => {
     setIsModalOpen(true);
     console.log("creating query");
   };
 
-  const handleChange = (name) => (event) => {
-    setUserData({ ...userData, [name]: event.target.value });
+  const handleChange = (e) => {
+    e.preventDefault();
+    setMessage(e.target.value);
+  };
+
+  const handlePurpose = (e) => {
+    e.preventDefault();
+    setPurpose(e.target.value);
+  };
+
+  const onClose = () => {
+    setIsModalOpen(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUserQuery({ userData }, usrPhone);
-    console.log(userData);
-    setIsModalOpen(false);
+    createUserQuery(purpose, message, usrPhone).then(() => {
+      setIsModalOpen(false);
+      setIsQueryCreated(true);
+    });
   };
 
   return (
@@ -60,8 +82,11 @@ export default function Dashboard(props) {
       {/* Top Most Container Logo and User Info */}
       <Query
         isOpen={isModalOpen}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        onClose={onClose}
+        message={message}
+        handlePurpose={handlePurpose}
       />
       <Box>
         <Flex
@@ -183,7 +208,8 @@ export default function Dashboard(props) {
                   </Box>
                 </Box>
               </Flex>
-              <Box
+              <Box>{userQuery && <QueryList queries={userQuery} />}</Box>
+              {/* <Box
                 paddingTop={"1rem"}
                 paddingLeft={"2rem"}
                 backgroundColor={"white"}
@@ -193,12 +219,16 @@ export default function Dashboard(props) {
                 marginY={"2rem"}
                 maxWidth={"2xl"}
               >
-                <Box>Your Current Query</Box>
+                <Box>
+                  <Text fontSize={"lg"} fontWeight={"bold"}>
+                    {}
+                  </Text>
+                </Box>
                 <Spacer></Spacer>
                 <Box paddingY={"2rem"} fontSize={"xl"} fontWeight={"bold"}>
-                  Need to pay college fees
+                  Hello
                 </Box>
-              </Box>
+              </Box> */}
             </Box>
             {/* Right Illustration */}
             <Spacer></Spacer>

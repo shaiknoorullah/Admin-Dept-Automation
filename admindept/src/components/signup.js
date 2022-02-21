@@ -16,10 +16,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import logowhite from "../img/logo 1.png";
-import { validation } from "./validate";
-import { confirmOTP, sendOTP } from "./userAuth";
+import { validation } from "../fuctions/validate";
+import { confirmOTP, sendOTP } from "../fuctions/userAuth";
 import Otpmodal from "./otpmodal";
-import { createUserDocument, CheckUsrPhnInDb } from "./database";
+import { createUserDocument, CheckUsrPhnInDb } from "../fuctions/database";
 import Top from "../img/top.svg";
 import { Link } from "react-router-dom";
 
@@ -46,26 +46,46 @@ export default function Signup() {
   const toast = useToast({
     position: "top-right",
     containerStyle: {
-      width: '200px',
-      maxWidth: '100%',
+      width: "200px",
+      maxWidth: "100%",
       isClosable: true,
     },
   });
   const toastIdRef = React.useRef();
 
   function otpToast() {
-    toastIdRef.current = toast({ title: 'OTP Sent', description: 'OTP sent',status:'success',isClosable: true})
+    toastIdRef.current = toast({
+      title: "OTP Sent",
+      description: "OTP sent",
+      status: "success",
+      isClosable: true,
+    });
   }
   function errorToast() {
-    toastIdRef.current = toast({ title: 'Error',description: 'You are already a user, please Sign in',status:'error', isClosable: true,})
+    toastIdRef.current = toast({
+      title: "Error",
+      description: "You are already a user, please Sign in",
+      status: "error",
+      isClosable: true,
+    });
   }
 
   function otpError() {
-    toastIdRef.current = toast({ title: 'OTP wrong',description: 'OTP Mismatched',status:'error', isClosable: true,})
+    toastIdRef.current = toast({
+      title: "OTP wrong",
+      description: "OTP Mismatched",
+      status: "error",
+      isClosable: true,
+    });
   }
 
   function signupSuccessful() {
-    toastIdRef.current = toast({ title: 'Signup Successful',description: 'You are a user now, Sign in and rock',status:'success',isClosable: true, })
+    toastIdRef.current = toast({
+      title: "Signup Successful",
+      description: "You are a user now, Sign in and rock",
+      status: "success",
+      isClosable: true,
+    });
   }
 
   const handleSubmit = async (event) => {

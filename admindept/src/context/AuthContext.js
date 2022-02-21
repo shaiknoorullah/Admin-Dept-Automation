@@ -1,5 +1,5 @@
 import { createContext, useEffect, useReducer } from "react";
-import { auth } from "../components/userAuth";
+import { auth } from "../fuctions/userAuth";
 import { onAuthStateChanged } from "firebase/auth";
 
 // creating authcontext using createContext() hook from react
