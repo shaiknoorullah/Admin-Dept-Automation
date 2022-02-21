@@ -27,7 +27,7 @@ export default function Dashboard(props) {
   const [purpose, setPurpose] = useState("");
   const [message, setMessage] = useState("");
   const [isPending, setIsPending] = useState(true);
-  const [isQueryCreated, setIsQueryCreated] = useState(false);
+  // const [isQueryCreated, setIsQueryCreated] = useState(false);
   //   console.log(message, "message");
 
   let usrPhone = props.user.phoneNumber;
@@ -47,7 +47,7 @@ export default function Dashboard(props) {
       // console.log(queries);
       setUserQuery(queries);
     });
-  }, [isQueryCreated]);
+  }, [userQuery]);
   console.log(userQuery);
 
   const openQuery = () => {
@@ -73,7 +73,7 @@ export default function Dashboard(props) {
     e.preventDefault();
     createUserQuery(purpose, message, usrPhone).then(() => {
       setIsModalOpen(false);
-      setIsQueryCreated(true);
+      // setIsQueryCreated(true);
     });
   };
 
@@ -209,26 +209,6 @@ export default function Dashboard(props) {
                 </Box>
               </Flex>
               <Box>{userQuery && <QueryList queries={userQuery} />}</Box>
-              {/* <Box
-                paddingTop={"1rem"}
-                paddingLeft={"2rem"}
-                backgroundColor={"white"}
-                borderColor={"#E1EAFF"}
-                borderWidth={"0.1rem"}
-                borderRadius={"xl"}
-                marginY={"2rem"}
-                maxWidth={"2xl"}
-              >
-                <Box>
-                  <Text fontSize={"lg"} fontWeight={"bold"}>
-                    {}
-                  </Text>
-                </Box>
-                <Spacer></Spacer>
-                <Box paddingY={"2rem"} fontSize={"xl"} fontWeight={"bold"}>
-                  Hello
-                </Box>
-              </Box> */}
             </Box>
             {/* Right Illustration */}
             <Spacer></Spacer>
