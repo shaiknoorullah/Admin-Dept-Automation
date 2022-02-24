@@ -39,9 +39,6 @@ export default function Dashboard(props) {
       setStudentName(data.studentname.stringValue);
       //   console.log(userData.studentname)
     });
-  }, []);
-
-  useEffect(() => {
     getUsrQuery(usrPhone).then((queries) => {
       // setIsQueryCreated(true);
       // console.log(queries);
