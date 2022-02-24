@@ -1,20 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Flex,
-  Spacer,
-  Image,
-  Box,
-  Button,
-  Center,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Text,
-  HStack,
-  Stack,
-  VStack,
-} from "@chakra-ui/react";
+import React from "react";
+import { Flex, Box, HStack, Stack } from "@chakra-ui/react";
 
 export default function QueryList({ queries }) {
   return (

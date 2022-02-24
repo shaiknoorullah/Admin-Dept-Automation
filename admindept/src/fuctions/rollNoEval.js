@@ -1,9 +1,6 @@
-
-
 // Fuction to extract Information from students roll number
 
 export function rollNoEval(roll_no) {
-  
   //temporarily storing the roll no in const variable
   const temproll = roll_no;
 
@@ -19,7 +16,7 @@ export function rollNoEval(roll_no) {
   const ClassRollNo = temproll.slice(-3);
 
   // according to osmania university, the branches are given specific
-  // codes, these codes are used in roll numbers. 
+  // codes, these codes are used in roll numbers.
 
   const BranchIdentifier = Number(temproll.charAt(8)) - 2;
 
@@ -36,25 +33,6 @@ export function rollNoEval(roll_no) {
   // const BranchesId = ["2","3","4","5","6","7","8","9"]
 
   const Branch = Branches[BranchIdentifier];
-
-
-  // this function evaluates the branch of the student from roll number  
-
-  async function Branchofstudent(Branches, BranchesId) {
-    for (const i of BranchesId) {
-      // console.log(typeof BranchesId[i]);
-
-      if (BranchesId[i] == BranchIdentifier) {
-        // console.log(BranchesId[i], Branches[i]);
-
-        return (Branch = Branches[i]);
-      } else {
-        // console.log("Invalid Branch ID in Roll No")
-        // console.log(typeof(Branches[i]))
-        continue;
-      }
-    }
-  }
 
   //creating the object rollNoInfo that holds all the information
   //extracted from roll number and return it

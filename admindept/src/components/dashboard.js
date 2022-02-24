@@ -26,26 +26,28 @@ export default function Dashboard(props) {
   const [studentName, setStudentName] = useState("");
   const [purpose, setPurpose] = useState("");
   const [message, setMessage] = useState("");
-  const [isPending, setIsPending] = useState(true);
   // const [isQueryCreated, setIsQueryCreated] = useState(false);
   //   console.log(message, "message");
 
   let usrPhone = props.user.phoneNumber;
 
   const [userQuery, setUserQuery] = useState([]);
+  // const
 
   useEffect(() => {
     getUsrData(usrPhone).then((data) => {
       setStudentName(data.studentname.stringValue);
       //   console.log(userData.studentname)
     });
+  }, []);
+
+  useEffect(() => {
     getUsrQuery(usrPhone).then((queries) => {
       // setIsQueryCreated(true);
       // console.log(queries);
       setUserQuery(queries);
     });
   }, []);
-
 
   const openQuery = () => {
     setIsModalOpen(true);

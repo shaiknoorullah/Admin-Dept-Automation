@@ -45,6 +45,8 @@ export const CheckUsrPhnInDb = async (mobile, rollNo) => {
   }
   return shouldsign;
 };
+
+// function to get user data from DB using mobile number
 export const getUsrData = async (mobile) => {
   // Reference of the collection in which students data is stored
   const studentRef = collection(appdb, "users");
@@ -68,21 +70,21 @@ export const getUsrData = async (mobile) => {
   return user;
 };
 
+// function that returns all the queries created by student
 export const getUsrQuery = async (mobile) => {
-  // Reference of the collection in which students data is stored
+  // Reference of the collection in which students query is stored
   const queryRef = collection(appdb, "queries/Documents/queries");
 
-  // queries to DB for phone number and roll number
+  // queries to DB for phone number
   const phnQuery = query(queryRef, where("phone", "==", mobile));
 
   const userdocument = await getDocs(phnQuery);
 
-  // shoul sign is a boolean that tells if a user could signup based on true or false
+  // array to store returned queries
   let userQueryData = [];
 
-  // Letting the user signup only if either of the queries return null
   if (userdocument.empty) {
-    console.log("the user doesnt exist");
+    // console.log("the query doesnt exist");
   } else {
     userdocument.forEach((doc) => {
       userQueryData.push(doc._document.data.value.mapValue.fields);
@@ -116,8 +118,12 @@ export const CheckUsrPhnInDbForSignin = async (mobile) => {
   return shouldsign;
 };
 
+// function to create query for students
 export const createUserQuery = async (purpose, message, phoneNumber) => {
+  // get user data from DB using custom function defined before
   const userData = await getUsrData(phoneNumber);
+
+  // destructuring the properties
   const {
     Branch,
     ClassRollNo,
@@ -130,8 +136,9 @@ export const createUserQuery = async (purpose, message, phoneNumber) => {
   } = userData;
 
   const queryRef = collection(appdb, "queries/Documents/queries");
-  console.log(queryRef);
+  // console.log(queryRef);
 
+  //creating the query
   try {
     await addDoc(
       queryRef,

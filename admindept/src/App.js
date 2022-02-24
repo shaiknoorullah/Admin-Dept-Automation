@@ -8,8 +8,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import Dashboard from "./components/dashboard.js";
-import {useAuthContext} from './hooks/useAuthContext'
-import Query from "./components/query.js";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
   const { authIsReady, user, mobile } = useAuthContext();
