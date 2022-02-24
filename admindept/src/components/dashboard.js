@@ -39,16 +39,13 @@ export default function Dashboard(props) {
       setStudentName(data.studentname.stringValue);
       //   console.log(userData.studentname)
     });
-  }, []);
-
-  useEffect(() => {
     getUsrQuery(usrPhone).then((queries) => {
       // setIsQueryCreated(true);
       // console.log(queries);
       setUserQuery(queries);
     });
-  }, [userQuery]);
-  console.log(userQuery);
+  }, []);
+
 
   const openQuery = () => {
     setIsModalOpen(true);
@@ -74,6 +71,11 @@ export default function Dashboard(props) {
     createUserQuery(purpose, message, usrPhone).then(() => {
       setIsModalOpen(false);
       // setIsQueryCreated(true);
+    });
+    getUsrQuery(usrPhone).then((queries) => {
+      // setIsQueryCreated(true);
+      // console.log(queries);
+      setUserQuery(queries);
     });
   };
 
