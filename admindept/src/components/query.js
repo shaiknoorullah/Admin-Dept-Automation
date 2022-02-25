@@ -21,6 +21,7 @@ export default function Query(props) {
   return (
     <div>
       <Modal isOpen={props.isOpen} size={"xl"}>
+        <ModalOverlay bg="none" backdropFilter="auto" backdropBlur="2px" />
         <ModalOverlay />
         <ModalContent>
           <Box>

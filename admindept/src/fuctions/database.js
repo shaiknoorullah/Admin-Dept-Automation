@@ -159,6 +159,7 @@ export const createUserQuery = async (purpose, message, phoneNumber) => {
       { merge: false }
     );
     console.log("Document written with ID: ", queryRef);
+    window.location.reload();
   } catch (e) {
     console.log("Error adding document: ", e);
   }

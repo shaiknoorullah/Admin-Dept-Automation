@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Flex,
   Spacer,
-  Image,
   Box,
   Button,
+  Image,
   Center,
   Menu,
   MenuButton,
@@ -13,36 +13,65 @@ import {
   Text,
 } from "@chakra-ui/react";
 import logo from "../img/logo 1.png";
-import avatar from "../img/avatar.png";
+import avatar from "../img/avatars/1.png";
 import waiting from "../img/waiting.svg";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { UsrSignOut } from "../fuctions/userAuth";
 import Query from "./query";
 import { createUserQuery, getUsrData, getUsrQuery } from "../fuctions/database";
 import QueryList from "./querylist";
+import Profile from "./profile";
+import { Link } from "react-router-dom";
+import { loadImages } from "../fuctions/imageLoader";
+// import { Imageloader } from "stupid-imageloader";
 
 export default function Dashboard(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [studentName, setStudentName] = useState("");
   const [purpose, setPurpose] = useState("");
   const [message, setMessage] = useState("");
+  // const [userAvatar, setUserAvatar] = useState();
   // const [isQueryCreated, setIsQueryCreated] = useState(false);
   //   console.log(message, "message");
 
-  let usrPhone = props.user.phoneNumber;
+  // var Imageloader = require("stupid-imageloader");
+  // // console.log(Imageloader);
+  // var imageloader = Imageloader();
 
+  // imageloader
+  //   .load(loadImages()) // returns a promise (stupid-deferred)
+  //   .success((image) => {
+  //     setUserAvatar(image);
+  //     console.log(userAvatar);
+  //   })
+  //   .error((e) => {
+  //     console.log("could not load", e);
+  //   });
+
+  let usrPhone = props.user.phoneNumber;
+  // const [userAvatar, setUserAvatar] = useState("");
+  // console.log(userAvatar);
+  // const userAvatar = require(loadImages());
   const [userQuery, setUserQuery] = useState([]);
-  // const
 
   useEffect(() => {
+    // loadImages().then((data) => {
+    //   setUserAvatar(data);
+    //   console.log(data);
+    // });
     getUsrData(usrPhone).then((data) => {
       setStudentName(data.studentname.stringValue);
       //   console.log(userData.studentname)
     });
+  }, []);
+
+  useEffect(() => {
     getUsrQuery(usrPhone).then((queries) => {
       // setIsQueryCreated(true);
       // console.log(queries);
       setUserQuery(queries);
+      console.log("hi");
     });
   }, []);
 
@@ -78,6 +107,13 @@ export default function Dashboard(props) {
     });
   };
 
+  const openProfileModal = () => {
+    setIsProfileOpen(true);
+  };
+  const closeProfileModal = () => {
+    setIsProfileOpen(false);
+  };
+
   return (
     <div>
       {/* Top Most Container Logo and User Info */}
@@ -89,6 +125,14 @@ export default function Dashboard(props) {
         message={message}
         handlePurpose={handlePurpose}
       />
+      {isProfileOpen && (
+        <Profile
+          isOpen={isProfileOpen}
+          isClosed={closeProfileModal}
+          avatar={avatar}
+        />
+      )}
+
       <Box>
         <Flex
           backgroundColor={"#2455D6"}
@@ -117,7 +161,9 @@ export default function Dashboard(props) {
                 Actions
               </MenuButton>
               <MenuList>
-                <MenuItem textColor={"gray.500"}>Profile</MenuItem>
+                <MenuItem textColor={"gray.500"} onClick={openProfileModal}>
+                  Profile
+                </MenuItem>
                 <MenuItem color={"red.500"} onClick={UsrSignOut}>
                   Sign out
                 </MenuItem>
